@@ -1,0 +1,74 @@
+#+TITLE: SuperGlue DSN presentation preparation 
+#+OPTIONS: html-postamble:nil
+* some information (page count estimates \sim 40 pages currently)
+- *25+5 minutes rule*
+- Session MT5A on Thursday, June 30th, 2016, 14:00 – 15:30
+- some pages includes animation (i,e., multiple pages)
+- need keep working on the transition from high-level motivation to
+  the SuperGlue
+
+* Outline
+
+** dependability in real-time and embedded system (8 pages)
+- safety-critical system
+- examples and consequences
+- system-level services can be affected by SEUs
+
+** application-level fault tolerance (3 pages)
+- example
+- checkpoint, N-version...
+
+** system-level fault tolerance (5 pages)
+- challenges
+- scheduler can be affected (examples)
+- other services as well, such as fs, lock, memory mapping manager
+
+** computational crash cart - C3 (4~6 pages)
+- one solution to this problem in a component-based operating system
+- steps (this needs be detailed and illustrated with an example)
+  - C3 does fault detection
+  - C3 does micro-reboot and bring the faulty component back to a safe
+    state
+  - C3 does bring the faulty component back to a consistent state
+    using tracked descriptor state at the component interface (need
+    define the descriptor, using example)
+- manually implementing C3 it is error-prone, we want to ease
+  programmer's burden
+  - LOCs the programmer needs to add to individual interface
+  - maintain and extend
+
+** SuperGlue high-level introduction (1 page)
+- goal: automatically generate C3 style fault recovery code
+- design: from high-level model to low-level mechanism
+- how to achieve this?
+  - define interface description language (IDL) to describe the
+    component and interface
+  - use IDL compiler to synthesize the code
+
+** SuperGlue design (around 20 pages in total)
+- based on 3 *observation*
+  - /descriptor-resource model/
+    - why do we need such a model?? 
+    - use examples to illustrate
+    - how to describe the model? -> IDL
+  - /descriptor state machine/
+    - why do we need such a state machine?
+    - use example to illustrate
+    - how to describe the SM? -> IDL
+  - /categorized recovery mechanisms/
+    - what are those recovery mechanisms in C3?
+    - why do we need categorize? 
+    - use example to illustrate
+    - how to describe these recovery mechanisms? code template and
+      predicates
+- synthesizing the code
+  - briefly mention the process
+  - illustrate with one example
+
+** Results (2 pages)
+- show the result (LOCs and fault injection campaign)
+- show the web server result
+
+** Conclusion (1 page)
+- efficient and effectiveness 
+- emphasize that SuperGlue eases programmer's burden

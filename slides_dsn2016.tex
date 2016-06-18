@@ -1,0 +1,1355 @@
+\documentclass[13pt,xcolor={usenames,dvipsnames}]{beamer}
+%% \mode<presentation>
+%\usetheme{Warsaw}
+\usetheme[height=8mm]{Rochester}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{navigation symbols}{}
+
+% if add some extra slides  -- Jiguo
+\newif\ifnoextra
+\noextratrue       % this will exclude all extra sides
+% \noextrafalse      % this will include all extra sides
+
+% if show page number    -- Jiguo
+\newif\ifpgnum
+\pgnumtrue       % this will exclude all extra sides
+% \pgnumfalse      % this will include all extra sides
+
+\ifpgnum
+\setbeamertemplate{footline}[page number]
+\else 
+\fi
+
+
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+\usepackage[absolute,overlay]{textpos}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{soul}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{environ}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+%\usepackage{charter}
+
+%\beamertemplateballitem
+%\setbeameroption{show notes}
+%\usecolortheme{lily}
+%\usecolortheme{whale}
+
+
+%\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,matrix}
+
+\definecolor{light-gray}{gray}{0.8}
+\definecolor{dgray}{rgb}{0.3,0.3,0.5}
+\usecolortheme[named=dgray]{structure}
+\definecolor{grey}{rgb}{0.3,0.3,0.5}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{bole}{rgb}{0.47, 0.27, 0.23}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{indiagreen}{rgb}{0.07, 0.53, 0.03}
+
+% code by Andrew:
+% http://tex.stackexchange.com/a/28452/13304
+\makeatletter
+\let\matamp=&
+\catcode`\&=13
+\makeatletter
+\def&{\iftikz@is@matrix
+  \pgfmatrixnextcell
+  \else
+  \matamp
+  \fi}
+\makeatother
+
+\newcounter{lines}
+\def\endlr{\stepcounter{lines}\\}
+
+\newcounter{vtml}
+\setcounter{vtml}{0}
+
+\newif\ifvtimelinetitle
+\newif\ifvtimebottomline
+\tikzset{description/.style={
+    column 2/.append style={#1}
+  },
+  timeline color/.store in=\vtmlcolor,
+  timeline color=red!255!black,
+  timeline color st/.style={fill=\vtmlcolor,draw=\vtmlcolor},
+  use timeline header/.is if=vtimelinetitle,
+  use timeline header=false,
+  add bottom line/.is if=vtimebottomline,
+  add bottom line=false,
+  timeline title/.store in=\vtimelinetitle,
+  timeline title={},
+  line offset/.store in=\lineoffset,
+  line offset=4pt,
+}
+
+\NewEnviron{vtimeline}[1][]{%
+  \setcounter{lines}{1}%
+  \stepcounter{vtml}%
+  \begin{tikzpicture}[column 1/.style={anchor=east},
+    column 2/.style={anchor=west},
+    text depth=0pt,text height=1ex,
+    row sep=1ex,
+    column sep=1em,
+    #1
+    ]
+    \matrix(vtimeline\thevtml)[matrix of nodes]{\BODY};
+    \pgfmathtruncatemacro\endmtx{\thelines-1}
+    \path[timeline color st] 
+    ($(vtimeline\thevtml-1-1.north east)!0.5!(vtimeline\thevtml-1-2.north
+    west)$)--
+    ($(vtimeline\thevtml-\endmtx-1.south
+    east)!0.5!(vtimeline\thevtml-\endmtx-2.south west)$);
+    \foreach \x in {1,...,\endmtx}{
+      \node[circle,timeline color st, inner sep=0.25pt, draw=white, thick] 
+      (vtimeline\thevtml-c-\x) at 
+      ($(vtimeline\thevtml-\x-1.east)!0.5!(vtimeline\thevtml-\x-2.west)$){};
+      \draw[timeline color st](vtimeline\thevtml-c-\x.west)--++(-3pt,0);
+    }
+    \ifvtimelinetitle%
+    \draw[timeline color st]([yshift=\lineoffset]vtimeline\thevtml.north
+    west)--
+    ([yshift=\lineoffset]vtimeline\thevtml.north east);
+    \node[anchor=west,yshift=16pt,font=\large]
+    at (vtimeline\thevtml-1-1.north west) 
+    {\textsc{Timeline} \hspace{1cm} \textit{\vtimelinetitle}};
+    \else%
+    \relax%
+    \fi%
+    \ifvtimebottomline%
+    \draw[timeline color
+    st]([yshift=-\lineoffset]vtimeline\thevtml.south west)--
+    ([yshift=-\lineoffset]vtimeline\thevtml.south east);
+    \else%
+    \relax%
+    \fi%
+  \end{tikzpicture}
+}
+
+
+\usepackage{listings}
+\lstset{numbers=none,language=[ISO]C++,tabsize=4,
+  frame=single,
+  basicstyle=\small,
+  showspaces=false,showstringspaces=false,
+  showtabs=false,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{red},
+}
+
+\usepackage[absolute,overlay]{textpos}
+\usepackage{tikz}
+
+% We need lots of libraries...
+\usetikzlibrary{%
+  arrows,%
+  calc,%
+  fit,%
+  patterns,%
+  plotmarks,%
+  shapes.geometric,%
+  shapes.misc,%
+  shapes.symbols,%
+  shapes.arrows,%
+  shapes.callouts,%
+  shapes.multipart,%
+  shapes.gates.logic.US,%
+  shapes.gates.logic.IEC,%
+  er,%
+  automata,%
+  backgrounds,%
+  chains,%
+  topaths,%
+  trees,%
+  petri,%
+  mindmap,%
+  matrix,%
+  calendar,%
+  folding,%
+  fadings,%
+  through,%
+  positioning,%
+  scopes,%
+  decorations.fractals,%
+  decorations.shapes,%
+  decorations.text,%
+  decorations.pathmorphing,%
+  decorations.pathreplacing,%
+  decorations.footprints,%
+  decorations.markings,%
+  shadows} 
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+%**
+% \PutAt<overlay spec>[<box width>]{(<x>, <y>)}{<content>}
+%
+% real absolute positioning of <content> on a slide, if content is a
+% figure,
+% minipage or whatever kind of LR-box, the <box width> argument may be
+% omitted
+%
+%
+% implementation notes: 
+%   - based on   \usepackage[absolute,overlay]{textpos}
+%   - NOT combinable with any beamer feature that is based on pgfpages
+%     (such as dual-screen support, built-in 2up handouts, etc.), as
+% textpos 
+%     and pgfpates interfere at the shippout-level.
+%
+
+
+%def\Put(#1,#2)#3{\leavevmode\makebox(0,0){\put(#1,#2){#3}}}
+\newcommand<>{\PutJ}[3][0pt]{%
+  {\leavevmode\makebox(0,0)
+    {
+      \put(#1,#2){#3}
+    }
+  }
+}
+
+\newcommand<>{\PutAt}[3][0pt]{%
+  {\only#4{\begin{textblock*}{#1}#2%
+        #3
+      \end{textblock*}}}%
+}
+
+% **
+% \ShowPutAtGrid
+% 
+% draws a helpful grid on the current slide to figure <x> and <y>
+% parameters for \PutAt
+% 
+\newcommand{\ShowPutAtGrid}{
+  \begin{textblock*}{128mm}(0cm,0cm)
+    \tikz[color=red!20!white]\draw[very thin, step=5mm] (0mm,0mm) grid
+    (130mm,100mm);
+  \end{textblock*}
+  \begin{textblock*}{128mm}(0cm,0cm)
+    \begin{tikzpicture}[color=red]
+      \draw[step=1cm] (0,0mm) grid (130mm,100mm);   
+      \foreach \n in {0,...,12}
+      \draw[xshift=.5mm,yshift=-1.5mm, inner sep=0pt, anchor=west]
+      (\n,10) node {\scriptsize{\textbf{\n}}};
+      \foreach \n in {1,...,9}
+      \draw[xshift=.5mm,yshift=-1.5mm, inner sep=0pt, anchor=west]
+      (0,10-\n) node {\scriptsize{\textbf{\n}}};
+    \end{tikzpicture}
+  \end{textblock*}
+}
+
+% an box that does nothing
+\newcommand<>{\WhiteBox}[2][]{%
+  \only#3{\tikz[#1, every
+    node/.style={shape=rectangle,fill=white, #1}]\node []{#2};}
+}
+
+% **
+% \NormalBox<overlay spec>[tikz picture/node options]{<content>}
+% 
+% draws content boxed in a nice box
+% 
+\newcommand<>{\NormalBox}[2][]{%
+  \only#3{\tikz[#1, every
+    node/.style={shape=rectangle,draw,fill=white, drop shadow,
+      #1}]\node []{#2};}
+}
+% **
+% \OrangeBox<overlay spec>[tikz picture/node options]{<content>}
+%
+% draws content boxed in an orange call-out box
+% 
+\newcommand<>{\OrangeBox}[2][]{%
+  \onslide#3{\NormalBox[fill=orange!30,draw=black!30,rounded
+      corners=4pt,#1]{#2}}%
+} 
+
+%**
+% \OrangeBox<overlay spec>[tikz picture/node options]{<content>}
+%
+% draws content boxed in an orange call-out box
+% 
+\newcommand<>{\ColorBox}[2][]{%
+  \onslide#3{\NormalBox[fill=grey!30,draw=black!30, very thick,rounded
+    corners=4pt,#1]{#2}}%
+}
+
+\newcommand<>{\NoColorBox}[2][]{%
+  \onslide#3{\NormalBox[fill=white!30,draw=white!30,#1]{#2}}%
+}
+
+
+% \usepackage{tikz}
+% \addtobeamertemplate{headline}{}
+% {% 
+%   \begin{flushright}
+%     \begin{tikzpicture}[remember picture,overlay]
+%       \node [left ]{\includegraphics[width=2cm]{gwu}};
+%     \end{tikzpicture}
+%   \end{flushright}
+%   \vskip -0.7cm
+% }
+
+% \pgfdeclareimage[width=1.5cm]{logo}{gwu2}
+% \logo{\pgfuseimage{logo}}
+
+% \setbeamertemplate{itemize items}[default]
+%%%\setbeamertemplate{itemize items}{\textbullet}
+%%%\setbeamertemplate{enumerate items}[default]
+%%%\setbeamertemplate{footline}[page number]
+
+% % % logo of GWU
+% \titlegraphic{
+%   \centering
+%   \vspace{-0.5cm}%
+%   \includegraphics[width=2cm]{gwu2}
+%   \vspace{0.5cm}%
+% }
+
+%%\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+%\usepackage[font=small,textfont={color=blue,bf},labelformat=empty]{caption}
+
+\usepackage{verbatim}
+\institute{}
+% \subject{RMRF}
+
+\def\Composite{\textsc{Composite}}
+\def\composite{\textsc{Composite}}
+\def\cos{\textsc{Composite}}
+\def\c3{\textsc{C$^3$}}
+\def\sg{\text{SuperGlue}}
+\def\sm{\textsc{State Machine}}
+\def\cmon{\textsc{C'Mon}}
+\def\cml{\textsc{CAML}}
+\def\smc{\textsc{SMC}}
+\def\id{\textit{descriptor}}
+\def\ids{\textit{descriptors}}
+\def\Id{\textit{Descriptor}}
+\def\Ids{\textit{Descriptors}}
+\def\rs{\textit{resource}}
+\def\rss{\textit{resources}}
+\def\Rs{\textit{Resource}}
+
+\def\emp{\textsc{EMP}}
+\def\ml{\textsc{ML}}
+
+\def\eg{\textit{e.g.}}
+\def\ie{\textit{i.e.}}
+
+\definecolor{pblue}{rgb}{0.2,0.2,0.9}
+\newcommand{\blue}[1]{{\color{pblue} #1}}
+%%\definecolor{pblue}{rgb}{0.2,0.2,0.9}
+\newcommand{\red}[1]{{\color{red} #1}}
+
+\makeatletter
+\newcommand\titlegraphicii[1]{\def\inserttitlegraphicii{#1}}
+\titlegraphicii{}
+\setbeamertemplate{title page}
+{
+  \vbox{}
+  {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\hfill\inserttitlegraphicii\par}
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+      \vskip0.25em%
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip0.5em\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}%\vskip0.5em
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+  \end{centering}
+  %\vfill
+}
+
+\makeatother
+%\author{Presented by {\bf Jiguo Song}}
+\title{\textbf{SuperGlue: IDL-Based, System-Level Fault Tolerance for
+    Embedded Systems}}
+\institute{\footnotesize Computer Science Department \\ The George Washington University}
+\date{\today}
+%\titlegraphicii{\includegraphics[height=1.4cm,width=2cm]{gwu2}}
+
+\usepackage{transparent}% http://ctan.org/pkg/transparent
+\setbeamercovered{transparent}
+\newcommand{\hidecontent}[2][0.25]{{% \hidecontent[<transparency>]{<stuff>}
+    \setbox9=\hbox{#2}% Store <stuff> in \box9 to obtain height/width
+    \transparent{#1}\ooalign{\usebox9\cr\color{white}\rule{\wd9}{\ht9}\cr}}}
+
+\setbeamercovered{invisible}
+
+\begin{document}
+
+\begin{frame}[plain]
+\maketitle
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Start the contents from here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Use the helicopter crash example, or blackout example
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\section{Motivation}
+\begin{frame}
+  \frametitle{Real-Time and Embedded Systems}
+  \begin{figure}
+    \centering
+    \only<1>{\hspace*{-1cm}\includegraphics[width=1\linewidth]{figures/motivation/ubiquitous/allmotiv_0}}%
+  \end{figure}
+  
+  \bigskip \vspace*{-0.2cm}
+  \hspace*{4cm}{\tiny \url{http://www.pcmag.com/encyclopedia/term/42554/embedded-system}}
+\end{frame}
+
+\begin{frame}{Consequences of Embedded System Faults}
+  Japanese X-ray astronomy satellite Hitomi lost in 2016
+  \begin{center}
+    \mbox{\only<1>{\hspace*{-0.72cm} \includegraphics[scale=0.18]{figures/motivation/hitomi}}}%
+    \mbox{\only<2>{\hspace*{-0.72cm} \includegraphics[scale=0.18]{figures/motivation/hitomi}}}%
+  \end{center}
+  \bigskip   \bigskip   \bigskip 
+  \begin{itemize}
+  \item Financial losses of \$286 million USD
+  \item ``{\em It's a scientific tragedy}'' - Richard Mushotzky, UMD
+  \end{itemize}
+  
+  \bigskip \bigskip 
+
+  % \hspace*{-0.2cm} {\footnotesize ``{\em It's a scientific
+  %     tragedy. We'd hoped for ten years.}'' - Richard Mushotzky, UMD}
+  
+  \vspace*{0.3cm} \hspace*{1cm}{\tiny
+    \url{http://www.nature.com/news/software-error-doomed-japanese-hitomi-spacecraft-1.19835}}
+
+  \PutAt<2>{(8cm,3cm)}{
+      \begin{center}
+        \includegraphics[width=4cm]{figures/motivation/radiation}
+      \end{center}
+    }
+
+\end{frame}
+
+\begin{frame}{Consequences of embedded system faults}
+  Toyota Sudden Unintended Acceleration (SUA) in 2004 -- 2010
+  \begin{center}
+    \mbox{\only<1>{\hspace*{-0.72cm} \includegraphics[scale=0.18]{figures/motivation/toyota}}}%
+  \end{center}
+  \begin{itemize}
+  \item 89 deaths as of May 2010 and nearly 400 U.S. lawsuits
+  \item Recall 10+ million vehicles and pay \$1.2 Billion USD fine
+  \end{itemize}
+
+  \bigskip \vspace*{0.5cm}\hspace*{2cm} {\tiny
+    \url{http://www.cbsnews.com/news/toyota-unintended-acceleration-has-killed-89/}}
+
+  %{\tiny \url{http://www.toyotaproblems.com/trends/unintended-acceleration/}}
+\end{frame}
+
+\begin{frame}{Sudden Unintended Acceleration}
+  \only<1>{\includegraphics[width=2.8in]{figures/motivation/toyota/toyota_etcs-i.png}}%
+  \only<1>{\includegraphics[width=1.5in]{figures/motivation/toyota/Toyota_ECMsm.jpg}}%
+  \only<2>{\includegraphics[width=2.8in]{figures/motivation/toyota/toyota_etcs-i.png}}%
+  \only<2>{\includegraphics[width=1.5in]{figures/motivation/toyota/Toyota_ECMsm.jpg}}%
+  
+  \bigskip
+  Uncontrolled acceleration in Toyota Camrys
+  \begin{itemize}
+  \item Electronic Throttle Control System (ETCS)
+  \item OSEK OS, 24 tasks, 280K LOC of C
+  \item bit flip in scheduler data-structures 
+        
+    $\to$ reproducible 30-sec uncontrolled acceleration 
+  \end{itemize}
+
+  \bigskip
+  ``{\em a bit-flip there, will have the effect of killing one of the
+  tasks}''
+
+  \hspace{2.6in}-- Bookout v Toyota
+
+  \PutAt<2>{(5.5cm,3cm)}{
+    \NormalBox[text width=6.5cm]{
+      \begin{center}
+        \includegraphics[width=1\textwidth]{figures/motivation/bitflip_new}
+      \end{center}
+    }
+  }
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Embedded faults:  Bad Now, Worse Tomorrow}
+  \hspace*{0.5cm}
+  \includegraphics[width=3.8in]{SuperGlueFigs/Electronics_Auto}
+  \medskip
+  \begin{itemize}
+  \item[{\color{green}+}] more functionality
+  \item[{\color{red}--}] more complexity $\to$ dependability more
+    challenging
+  \end{itemize}
+
+  \hspace*{3cm} {\tiny
+    \url{https://www.src.org/calendar/e003506/03-sessionii-rajkumar.pdf}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Embedded faults:  Bad Now, Worse Tomorrow}
+  \includegraphics[width=4.3in]{figures/latent/processtechnology/processtech}
+
+  \bigskip
+  Decreasing process sizes $\to$ 5nm
+  \begin{itemize}
+  \item[{\color{green}+}] faster
+  \item[{\color{green}+}] less power
+  \item[{\color{green}+}] smaller
+  \item[{\color{red}--}] increased vulnerability to HW transient
+    faults
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Application-Level Fault Tolerance}
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+      Application fault tolerance
+      \begin{itemize}
+      \item example recovery techniques
+        \begin{itemize}
+        \item recovery blocks
+        \item checkpointing
+        \item re-fork
+        \end{itemize}
+      \item temporal redundancy
+        \begin{itemize}
+        \item detect fault by job completion
+        \item replay execution from saved state
+        \end{itemize}
+      \item re-execution impacts only
+        
+        lower-priority tasks
+      \end{itemize}
+
+    \end{column}
+    \begin{column}{0.35\textwidth}
+      \vspace{-3em}
+      \only<1,3>{\includegraphics[width=1\textwidth]{figures/app1}}
+      \only<2>{\includegraphics[width=1\textwidth]{figures/app2}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{System-Level Fault Tolerance}
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+      System-level fault tolerance
+      \begin{itemize}
+      \item failures in
+        \begin{itemize}
+        \item scheduler
+        \item memory mapping manager
+        \item file-systems
+        \item synchronization manager
+        \item ...
+        \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.35\textwidth}
+      \begin{textblock}{40}(85,12)
+        \only<1> {\includegraphics[width=1\textwidth]{figures/sys1}}
+        \only<2> {\includegraphics[width=1\textwidth]{figures/sys2}}
+        \only<3> {\includegraphics[width=1\textwidth]{figures/sys3}}
+        \only<4> {\includegraphics[width=1\textwidth]{figures/BSOD.jpg}}
+      \end{textblock}
+    \end{column}
+  \end{columns}
+
+  \onslide<2->{ \bigskip System components contain state for all tasks
+    \begin{itemize}
+    \item failure impacts memory of {\em all} tasks
+    \end{itemize}
+  }
+  
+  \onslide<3->{ \bigskip Recovery requires resources
+    \begin{itemize}
+    \item processing time...to recovery scheduler
+    \item memory...to recover memory mapper
+    \end{itemize}
+  }
+  
+\end{frame}
+
+\begin{frame}{\c3: The {\sc C}omputational {\sc C}rash {\sc C}art}
+  \begin{columns}
+    \hspace{2em}
+    \begin{column}{0.55\textwidth}
+      {\bf \c3: Computational Crash Cart}
+      \begin{itemize}
+      \item resuscitate system
+      \item from system-level faults
+      \item predictably
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=2in]{figures/defib2.jpg}
+    \end{column}
+  \end{columns}
+
+  \bigskip
+  Main ideas
+  \begin{itemize}
+  \item pervasive \blue{fault isolation} $\to$ restrict propagation
+  \item efficient \blue{$\mu$-reboot} of individual components
+  \item \blue{interface-driven}, application-oblivious recovery
+  \item on-demand recovery $\to$ bound \blue{recovery inversion}
+  %\item minimize trusted computing base for fault tolerance
+  \end{itemize}
+
+  \bigskip \bigskip \bigskip
+
+  \setbeamercolor{block
+    title}{use=structure,fg=white,bg=purple!75!black}
+  \setbeamercolor{block
+    body}{use=structure,fg=black,bg=grey!20!white}
+  \begin{block}{\scriptsize \c3\ -- an interface-driven, predictable
+      system-level fault recovery mechanism}\scriptsize{J. Song,
+      J. Wittrock, and G. Parmer, ``Predictable, efficient
+      system-level fault tolerance in \c3'' in RTSS, 2013}\end{block}
+
+  % \setbeamercolor{block
+  %   title}{use=structure,fg=white,bg=purple!75!black}
+  % \setbeamercolor{block
+  %   body}{use=structure,fg=black,bg=grey!20!white}
+  % \begin{block}{\footnotesize Fault Model Assumption}\scriptsize{  
+  %     \begin{itemize}
+  %     \item processor single-event upset and fault is detected
+  %       immediately ({\sl fail-stop})
+  %     \item two consecutive faults are separated by the minimum time
+  %       interval
+  %     \end{itemize}
+  %   }\end{block}
+\end{frame}
+
+\begin{frame}{\c3\ System-Level Fault Recovery}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      Recovery sequence in \c3
+      \begin{enumerate}
+        \onslide<2->{
+        \item fault detection
+        }
+        \onslide<3->{
+        \item safe-state recovery
+          \begin{itemize}
+          \item $\mu$-reboot
+          \end{itemize}
+        }
+        \onslide<4->{
+        \item consistent-state recovery
+          \begin{itemize}
+          \item object state recovery
+          \end{itemize}
+        }
+      \end{enumerate}
+      \vspace{0.5in}
+      \hspace{0.7in}
+      \includegraphics[width=1.2in]{figures/3comp_key}
+    \end{column}
+    \begin{column}{0.27\textwidth}
+      \begin{textblock}{28}(85,12)
+        \only<1> {\includegraphics[width=1\textwidth]{figures/3comp}}
+        \only<2> {\includegraphics[width=1\textwidth]{figures/3comp2}}
+        \only<3> {\includegraphics[width=1\textwidth]{figures/3comp3}}
+        \only<4> {\includegraphics[width=1\textwidth]{figures/3comp4}}
+        \end{textblock}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\c3\ System-Level Fault Recovery}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{SuperGlueFigs/newerc3}
+  \end{figure}
+\end{frame}
+
+\section{\sg}
+
+\begin{frame}{\c3\ Implementation -- Writing Code Manually}
+  \only<1>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code1}}%
+  \only<2>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code2}}%
+  \only<3>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code3}}%
+  \only<4>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code4}}%
+  \only<5>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code5}}%
+  \only<6>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code6}}%
+
+  \PutAt<6>{(0.8cm,3.5cm)}{
+    \ColorBox[text width=11cm]{
+      \LARGE {Manually writing is ad-hoc and error-prone} \\
+      \vspace{0.6cm} \LARGE {Goal $\to$ {\bf automatically generate
+        \c3-style recovery code}}
+    }
+  }
+\end{frame}
+
+\begin{frame}{\sg\ -- IDL-based System-Level Fault Tolerance}
+  \begin{columns}
+    \hspace{0.6em}
+    \begin{column}{0.6\textwidth}
+      {\bf \sg}
+      \begin{itemize}
+      \item automatically generate interface-driven recovery code
+      \item for system-level services
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=1.6in]{SuperGlueFigs/SuperGlue}
+    \end{column}
+  \end{columns}
+  
+  \bigskip \bigskip \bigskip \bigskip
+  \begin{columns}
+    \hspace{0em}
+    \begin{column}{1.1\textwidth}
+      Main ideas
+      % \begin{list}{$\blacksquare$}{\leftmargin=1em \itemindent=0em}
+      \begin{itemize}
+      \item A system \blue{model} and \blue{interface description
+          language (IDL)}
+      %\item The \blue{mapping} from the model to the recovery
+      %  mechanisms
+      \item An \blue{IDL compiler} synthesizes recovery code from the
+        model
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\sg\ -- IDL-based System-Level Fault Tolerance}
+  \begin{textblock}{100}(14,14)
+    %\only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/overview_1}}%
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/overview_2}}%
+  \end{textblock}
+\end{frame}
+
+\begin{frame}{Descriptor-Resource Model}
+  \begin{textblock}{100}(14,12) \vspace{-0.5em}
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_1}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_2}}%
+    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_3}}%
+    \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_4}}%
+    \only<5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_5}}%
+    \only<6>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_6}}%
+    \only<7>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_6_1}}%
+  \end{textblock}
+\end{frame}
+\begin{frame}{Descriptor-Resource Model $\to$ IDL}
+  \begin{textblock}{100}(14,12) \vspace{-0.5em}
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_1}}%
+  \end{textblock}
+\end{frame}
+
+\begin{frame}{Component Interface Function}
+  \begin{textblock}{100}(14,12) \vspace{-0.5em}
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_7}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_8}}%
+    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_9}}%
+  \end{textblock}
+\end{frame}
+% \begin{frame}{Interface Functions $\to$ IDL}
+%   \begin{textblock}{100}(14,12) \vspace{-0.5em}
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_2}}%
+%   \end{textblock}
+% \end{frame}
+
+\begin{frame}{Descriptor State Machine}
+  \begin{textblock}{100}(14,12) \vspace{-0.5em}
+    %\only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_10}}%
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_11}}%
+  \end{textblock}
+\end{frame}
+\begin{frame}{Descriptor State Machine $\to$ IDL}
+  \begin{textblock}{100}(14,12) \vspace{-0.5em}
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_3}}%
+  \end{textblock}
+\end{frame}
+
+\begin{frame}{IDL-based Specification}
+  \begin{textblock}{100}(14,12) \vspace{-0.5em}
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_4}}%
+  \end{textblock}
+\end{frame}
+
+\begin{frame}{Toward Generating Recovery Code}
+  \begin{textblock}{100}(14,12) \vspace{-0.5em}
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_5}}%
+    %\only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_6}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_7}}%
+  \end{textblock}
+\end{frame}
+
+\begin{frame}{Interface-Driven Recovery Mechanisms}
+  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_0}}%
+  \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_1}}%
+  \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_2}}%
+  %\only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_3}}%
+  \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_4}}%
+  \only<5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_4_SM}}%
+\end{frame}
+
+\begin{frame}{Model $\to$ Recovery Mechanisms}
+  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_5}}%
+\end{frame}
+
+\begin{frame}{Synthesize the Recovery Code}
+  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_6}}%
+  \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_7}}%
+  \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_8}}%
+  \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_9}}%
+\end{frame}
+
+\begin{frame}{Generate Recovery Code}
+  \begin{textblock}{100}(14,12) \vspace{-0.5em}
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_4_1}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_4_2}}%
+    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_4_3}}%
+  \end{textblock}
+\end{frame}
+
+
+\begin{frame}{Code Generation Result}
+  \vspace{1em}
+  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/loc_new}}%
+\end{frame}
+
+\begin{frame}{Fault Injection Result}
+  \vspace{1em}
+  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/loc_new_gray}}%
+  
+  \PutAt<1>{(7cm,5.2cm)}{
+    \ColorBox[text width=4cm]{
+      \begin{center}
+        \includegraphics[width=1\linewidth]{SuperGlueFigs/SWIFI}
+      \end{center} 
+    }
+  }
+\end{frame}
+
+
+\begin{frame}{Web Server Evaluation with Injected Faults}
+    \includegraphics[width=1\linewidth]{SuperGlueFigs/WEB}
+\end{frame}
+
+\begin{frame}{Conclusion on \sg}
+  \sg\ -- code generation for system-level fault tolerance
+  \begin{itemize}
+  \item descriptor-resource \blue{model} and descriptor \blue{state
+      machine}
+  \item \blue{IDL-based} declarative specifications
+  \item \blue{compiler} for synthesizing \c3-style recovery code
+  \end{itemize}
+
+\end{frame}
+
+
+\section{Conclusion}
+\begin{frame}
+  \frametitle{Conclusion}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Thanks}
+  \begin{center}
+    \vspace{1in}
+    \color{black}\Huge{{? $||$ /* */}}
+
+    \vspace{0.5in}
+    \color{black}\Large{{composite.seas.gwu.edu}}
+
+    \bigskip
+    \includegraphics[width=2cm]{gwu2}
+  \end{center}
+\end{frame}
+
+
+\ifnoextra   % this will exclude all extra sides
+
+\else 
+
+
+\begin{frame}[plain]
+\end{frame}
+
+\begin{frame}[plain]
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+  \frametitle{What is transient fault?}
+  Transient (Soft-error) Faults
+  \begin{itemize}
+  \item Alpha and beta particles from packaging material and/or
+    neutrons from cosmic rays that: invert bit stored in SRAM cell,
+    dynamic latch, or gate (register or memory)
+  \item Transient faults persist for only a short duration
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A fault stayed in the system for 4 years!}
+  \begin{figure}
+    \centering
+    \vspace{-2em}
+    \includegraphics[width=0.8\linewidth]{figures/latent/malaysia777_1.png}
+  \end{figure}
+  {\tiny 08/01/2005, a Boeing Company 777-200 aircraft from Australia
+    to Malaysia \\A. T. S. Bureau. In-flight upset; 240km nw perth,
+    wa; boeing co 777- 200, 9m-mrg. Technical report, August 2005 }
+
+\end{frame}
+
+\begin{frame}{Tracking Events in \cmon\ - Synchronization}
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+      \item multiple-producer/single-consumer
+      \item lock is {\bf not} an option
+        \begin{itemize}
+        \item ``chicken or the egg''
+        \end{itemize}
+      \item restartable wait-free ring buffer
+        \begin{itemize}
+        \item roll the instruction pointer back to a 512 byte aligned
+          boundary, if an event entry is not valid
+        \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=0.8\textwidth]{figures/latent/CMon2_sync1}
+    \end{column}
+  \end{columns}
+  \setbeamercolor{block
+    title}{use=structure,fg=white,bg=purple!75!black}
+  \setbeamercolor{block
+    body}{use=structure,fg=black,bg=grey!20!white}
+  \bigskip \bigskip
+  \begin{block}{Invalid event entries}\scriptsize{The number of
+      wasted event entries are {\it bounded} by the maximum number of
+      preemptions of threads over the monitor task’s
+      period}\end{block}
+\end{frame}
+
+\begin{frame}{Tracking Events in \cmon\ - Synchronization}
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+      \item multiple-producer/single-consumer
+      \item lock is {\bf not} an option
+        \begin{itemize}
+        \item ``chicken or the egg''
+        \end{itemize}
+      \item restartable wait-free ring buffer
+        \begin{itemize}
+        \item roll the instruction pointer back to a 512 byte aligned
+          boundary, if an event entry is not valid
+        \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=0.8\textwidth]{figures/latent/CMon2_sync2}
+    \end{column}
+  \end{columns}
+  \setbeamercolor{block
+    title}{use=structure,fg=white,bg=purple!75!black}
+  \setbeamercolor{block
+    body}{use=structure,fg=black,bg=grey!20!white}
+  \bigskip \bigskip
+  \begin{block}{Invalid event entries}\scriptsize{The number of
+      wasted event entries are {\it bounded} by the maximum number of
+      preemptions of threads over the monitor task’s
+      period}\end{block}
+\end{frame}
+
+
+\begin{frame}{Processing Events - Data Structure}
+  \begin{columns}
+    \hspace{-2em}
+    \begin{column}{0.65\textwidth}
+      Each thread execution state
+      \begin{itemize}
+      \item total exec time
+      \item blocking time
+      \item per-component cumulative exec time
+      \item per-component invocation exec time
+      \item dependency due to shared resource contention
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.35\textwidth}
+      \includegraphics[width=0.9\textwidth]{figures/latent/CMon5}
+    \end{column}
+  \end{columns}
+  \bigskip \bigskip \bigskip
+\end{frame}
+
+{
+  \usebackgroundtemplate{\includegraphics[width=\paperwidth]{figures/LKM}}
+  \begin{frame}[plain]
+  \end{frame}
+}
+
+
+\begin{frame}
+  \frametitle{System level checkpoint overhead}
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/freertos/checkpoint_new}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overhead in \c3: no faults}
+  \begin{table}[!htb]
+    \large
+    \begin{center}
+      \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        Component & without tracking & tracking overhead \\
+        \hline\hline
+        Sched & 1.45 & 0.34\\
+        \hline
+        MM & 0.52 & 0.09 \\
+        \hline
+        FS & 1.65 & 1.12\\
+        \hline
+      \end{tabular}
+    \end{center}
+%    \caption{\color{black} \footnotesize{Bookkeeping Overhead
+%    ($\mu$-second)}}
+    \caption{\color{black} \footnotesize{infrastructure overhead ($\mu$-seconds)}}
+    \vspace{-1.4em}
+  \end{table}
+  \bigskip
+%  $\to$ Bookkeeping overhead is reasonable
+
+  \begin{table}[!htb]
+    \large
+    \begin{center}
+      \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        Component & LOC & Stub LOC \\
+        \hline\hline
+        Sched & 162(4.8\%) & 245\\
+        \hline
+        MM & 93(19.2\%) & 358\\
+        \hline
+        FS & 46(15.1\%) & 602\\
+        \hline
+      \end{tabular}
+    \end{center}
+%    \caption{\color{black} \footnotesize{Bookkeeping Overhead
+%    ($\mu$-second)}}
+    \caption{\color{black} \footnotesize{lines of code added}}
+    \vspace{-1.4em}
+  \end{table}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{FASSR vs Recovery Object Number}
+  \begin{figure}
+    \hspace*{-0.3in} 
+    \includegraphics[width=1\linewidth]{figures/RTA/RTA_SCHED_OBJ}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{FASSR vs Fault Period}
+  \begin{figure}
+    \hspace*{-0.3in} 
+    \includegraphics[width=1\linewidth]{figures/RTA/RTA_SCHED_FPERIOD}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{$\mu$Benchmark in \c3}
+  \begin{table}[!htb]
+    \small
+    \begin{center}
+      \hspace*{-0.2in} 
+      \begin{tabular}{|l|c|c|c|c}
+        \hline
+        Component & $\mu$-reboot -- mem init. & $\mu$-reboot -- exe
+        init. & object recovery\\
+        \hline\hline
+        Sched & 7.52  & 10.15  & 0.76  \\
+        \hline
+        MM & 16.06  & 4.00  & 0  \\
+        \hline
+        FS & 6.37  & 2.66  & 5.00 \\
+        \hline
+      \end{tabular}
+    \end{center}
+    \caption{\color{black} \footnotesize{recovery cost ($\mu$-seconds)}}
+  \end{table}
+  \bigskip
+  $\to$ Both $\mu$-reboot and object recovery are efficient
+\end{frame}
+
+\begin{frame}{System-level Fault Tolerance Challenges}
+  \begin{center}
+    \includegraphics[width=0.35\textwidth]{figures/sys1}
+  \end{center}
+
+  \bigskip
+  Recovering a \blue{consistent} state
+  \begin{itemize}
+  \item assumed state of {\em system objects} is comparable in all
+    parts of system
+    \begin{itemize}
+    \item {\em thread} at specific priority is blocked?
+    \item shared {\em page} mapped at specific address? 
+    \item {\em file} open at offset, opened with specific flags?
+    \end{itemize}
+  \end{itemize}
+  $\to$ rebooting subsystem is \blue{insufficient}
+\end{frame}
+
+\begin{frame}{\cos: A Component-Based OS}
+  \begin{columns}
+    \begin{column}{0.75\textwidth}
+      System functionality as {\em components}
+      \begin{itemize}
+      \item user-level, protection domains
+      \item fine-grained fault isolation
+      \end{itemize}
+      \vspace{0.5em}
+      Low-level services are components 
+      \begin{itemize}
+      \item kernel is small and policy-less
+      \item scheduling, memory mapping, synchronization...are in
+        user level
+      \end{itemize}
+
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \hspace{-3em}
+      \includegraphics[width=1.3\textwidth, height=18em]{figures/component_graph}
+
+      {\scriptsize Example component graph}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\cos: A Component-Based OS}
+  \begin{columns}
+    \begin{column}{0.75\textwidth}
+      \textcolor{gray}{System functionality as {\em components}}
+      \begin{itemize}
+      \item \textcolor{gray}{user-level, protection domains}
+      \item \textcolor{gray}{fine-grained fault isolation}
+      \end{itemize}
+      \vspace{0.5em}
+      \textcolor{gray}{Low-level services are components}
+      \begin{itemize}
+      \item \textcolor{gray}{scheduling, memory mapping, file system, lock... are in
+        user level}
+      \item \textcolor{gray}{kernel is small and does not have policy}
+      \end{itemize}
+
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \hspace{-3em}
+      \includegraphics[width=1.3\textwidth, height=18em]{figures/component_graph}
+
+      {\scriptsize Example component graph}
+    \end{column}
+  \end{columns}
+  \PutAt<1>{(0.3cm,3.5cm)}{
+    \ColorBox[text width=12cm]{
+      \begin{center}
+        \huge { \begin{itemize} \item Pervasive system-level fault
+            isolation\end{itemize}}
+      \end{center} 
+    }
+  }
+\end{frame}
+
+\begin{frame}{Timing Fault Detection}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/latent/examples/example1}
+  \end{figure}
+  \vspace{-1.5em}
+  \small
+  \begin{itemize}
+  \item Thread's exec time in a component is longer than the
+    component's WCET $\to$ {\bf{component execution overrun}}
+  \item Thread has been blocked longer than the maximum blocking time
+    $\to$ {\bf{unbounded PI}}
+  \item Schedule the highest-priority thread with dependency $\to$
+    {\bf{schedule the wrong task}}
+  \item Cycle in the dependencies $\to$ {\bf{deadlock}}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Processing Events - Activation}
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+      \item Time-triggered
+        \begin{itemize}
+        \item periodically processes events
+        %\item leaves enough slack
+        \end{itemize}
+      \item Buffer-triggered
+        \begin{itemize}
+        \item processes events when any shared buffer is full
+        \end{itemize}
+      \item ``first-come, first-served''
+      \end{itemize}
+    \end{column}
+    \hspace{-1em}
+    \begin{column}{0.55\textwidth}
+      \begin{textblock}{60}(72,20)
+        \includegraphics[width=0.9\textwidth]{figures/latent/CMon3}
+      \end{textblock}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Design Trade-off - Monitor Period}
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{figures/latent/tradeoff/time_trigger}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Design Trade-off - Memory Consumption}
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{figures/latent/tradeoff/buffer_trigger}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Minimum memory required for system schedulability}
+  \begin{figure}
+    \centering
+    \hspace*{-0.3in} 
+    \includegraphics[width=1.1\linewidth]{figures/latent/rta/mainmem}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Schedulability vs Monitoring Period}
+  \begin{figure}
+    \centering
+    \hspace*{-0.3in} 
+    \includegraphics[width=1.1\linewidth]{figures/latent/rta/mainperiod_1}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Schedulability vs Monitoring Period}
+  \begin{figure}
+    \centering
+    \hspace*{-0.3in} 
+    \includegraphics[width=1.1\linewidth]{figures/latent/rta/mainperiod_2}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{FASSR vs Task Utilization}
+    \hspace*{-0.3in}
+    \includegraphics[width=1.1\linewidth]{figures/SCHED_UTIL100}
+\end{frame}
+
+\begin{frame}{Component Invocation Event}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.37\textwidth]{figures/latent/cmonevt/eventlog1_new}
+  \end{figure}
+\end{frame}
+\begin{frame}{Component Invocation Event}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.37\textwidth]{figures/latent/cmonevt/eventlog2_new}
+  \end{figure}
+\end{frame}
+\begin{frame}{Component Invocation Event}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.37\textwidth]{figures/latent/cmonevt/eventlog2_2_new}
+  \end{figure}
+\end{frame}
+\begin{frame}{Component Invocation Event}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.37\textwidth]{figures/latent/cmonevt/eventlog2_new}
+  \end{figure}
+\end{frame}
+\begin{frame}{Component Invocation Event}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.37\textwidth]{figures/latent/cmonevt/eventlog3_new}
+  \end{figure}
+\end{frame}
+\begin{frame}{Component Invocation Event}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.37\textwidth]{figures/latent/cmonevt/eventlog4_new}
+  \end{figure}
+\end{frame}
+\begin{frame}{Component Invocation Event}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.37\textwidth]{figures/latent/cmonevt/eventlog5_new}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{GM Talk}
+  \begin{figure}
+    \centering
+    \hspace*{-0.3in} 
+    \includegraphics[width=1\linewidth]{SuperGlueFigs/GMtalk}
+  \end{figure}
+\end{frame}
+
+
+\fi   % this will include all extra sides
+
+\end{document}

@@ -400,7 +400,138 @@
 
 \setbeamercovered{invisible}
 
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outlines}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
 \begin{document}
+
+\begin{frame} {\red{TO BE REMOVED - Motivation}}
+\label{sec-2-1}
+Motivation (8 pages)
+\begin{itemize}
+\item fault tolerance is important to RTOS and embedded system
+  \begin{itemize}
+  \item safety-critical system
+  \end{itemize}
+\item examples and consequences
+  \begin{itemize}
+  \item Hitomi
+  \item SUA
+  \end{itemize}
+\item more complexity
+  \begin{itemize}
+  \item smaller feature size
+  \item more complex system
+  \item OS can be affected (65\%)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame} {\red{TO BE REMOVED - system-level FT challenges}}
+Why system-level fault tolerance is challenging?
+\begin{itemize}
+\item application-level fault tolerance (3 pages)
+\begin{itemize}
+\item example
+\item checkpoint, N-version\ldots{}
+\end{itemize}
+\item system-level fault tolerance (4 pages)
+\begin{itemize}
+\item scheduler can be affected (examples)
+\item other services as well, such as fs, lock, memory mapping manager
+\item challenges
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame} {\red{TO BE REMOVED - \c3}}
+  The {\sc C}omputational {\sc C}rash {\sc C}art
+  \begin{itemize}
+  \item introduce \c3\ at high level (1 page)
+    \begin{itemize}
+    \item maybe need Composite?
+    \end{itemize}
+  \item how \c3 works (4 pages)
+    \begin{itemize}
+    \item fault detection
+    \item micro-reboot and bring the faulty component back to a safe state
+    \item bring the faulty component back to a consistent state using
+      tracked descriptor state at the component interface
+    \end{itemize}
+  \item explain the intelligent code at the component interface (1 page)
+    \begin{itemize}
+    \item explain blue regions
+    \end{itemize}
+  \item start talking the issue with these manually written code (5
+    pages)    
+    \begin{itemize}
+    \item needs larger font
+    \item goal: less error-prone and ease the programmer burden
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame} {\red{TO BE REMOVED - \sg\ overview}}
+Introduce \sg\ (2 pages)
+\begin{itemize}
+\item goal: automatically generate C3 style fault recovery code
+\item idea: from high-level model to low-level mechanism
+\item example: use the lock example to show the goal
+  \begin{itemize}
+  \item needs to change the pic
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame} {\red{TO BE REMOVED - \sg\ design}}
+  Get some details about \sg\ (10 pages)
+  \begin{itemize}
+  \item based on 3 \textbf{observation}
+    \begin{itemize}
+    \item \emph{descriptor-resource model} 8 page
+      \begin{itemize}
+      \item use examples to illustrate the model
+      \item model to IDL
+      \end{itemize}
+    \item \emph{descriptor state machine} 6 pages
+      \begin{itemize}
+      \item use example to illustrate the model
+      \item SM to IDL
+      \end{itemize}
+    \item \emph{categorized recovery mechanisms} 5 pages
+      \begin{itemize}
+      \item recovery mechanisms in C3
+        \begin{itemize}
+        \item use some examples
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  \item link 2 models to categorized recovery mechanisms 5 pages
+    \begin{itemize}
+    \item discuss the code template and predicates
+    \item maybe only show the result w/o details
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame} {\red{TO BE REMOVED - \sg\ Result}}
+\label{sec-2-1}
+Show some results and experiments here
+\begin{itemize}
+\item LOC comparison (1 page)
+\item fault injection result (needs to add more here) (1 page)
+\item web server results (1 page)
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}[plain]
 \maketitle
@@ -414,7 +545,31 @@
 % Use the helicopter crash example, or blackout example
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-\section{Motivation}
+\section{Motivation and Challenges}
+
+\begin{frame} {\red{TO BE REMOVED - Motivation}}
+\label{sec-2-1}
+Motivation (8 pages)
+\begin{itemize}
+\item fault tolerance is important to RTOS and embedded system
+  \begin{itemize}
+  \item safety-critical system
+  \end{itemize}
+\item examples and consequences
+  \begin{itemize}
+  \item Hitomi
+  \item SUA
+  \end{itemize}
+\item more complexity
+  \begin{itemize}
+  \item smaller feature size
+  \item more complex system
+  \item OS can be affected (65\%)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}
   \frametitle{Real-Time and Embedded Systems}
   \begin{figure}
@@ -425,6 +580,7 @@
   \bigskip \vspace*{-0.2cm}
   \hspace*{4cm}{\tiny \url{http://www.pcmag.com/encyclopedia/term/42554/embedded-system}}
 \end{frame}
+
 
 \begin{frame}{Consequences of Embedded System Faults}
   Japanese X-ray astronomy satellite Hitomi lost in 2016
@@ -532,6 +688,22 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame} {\red{TO BE REMOVED - system-level FT challenges}}
+Why system-level fault tolerance is challenging?
+\begin{itemize}
+\item application-level fault tolerance (3 pages)
+\begin{itemize}
+\item example
+\item checkpoint, N-version\ldots{}
+\end{itemize}
+\item system-level fault tolerance (4 pages)
+\begin{itemize}
+\item scheduler can be affected (examples)
+\item other services as well, such as fs, lock, memory mapping manager
+\item challenges
+\end{itemize}
+\end{itemize}
+\end{frame}
 
 \begin{frame}{Application-Level Fault Tolerance}
   \begin{columns}
@@ -601,7 +773,32 @@
     \item memory...to recover memory mapper
     \end{itemize}
   }
-  
+\end{frame}
+
+\section{System-Level Fault Recovery - \c3}
+
+\begin{frame} {\red{TO BE REMOVED - \c3}}
+  The {\sc C}omputational {\sc C}rash {\sc C}art
+  \begin{itemize}
+  \item introduce \c3\ at high level (1 page)
+  \item how \c3 works (4 pages)
+    \begin{itemize}
+    \item fault detection
+    \item micro-reboot and bring the faulty component back to a safe state
+    \item bring the faulty component back to a consistent state using
+      tracked descriptor state at the component interface
+    \end{itemize}
+  \item explain the intelligent code at the component interface (1 page)
+    \begin{itemize}
+    \item explain blue regions
+    \end{itemize}
+  \item start talking the issue with these manually written code (5
+    pages)    
+    \begin{itemize}
+    \item needs larger font
+    \item goal: less error-prone and ease the programmer burden
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{\c3: The {\sc C}omputational {\sc C}rash {\sc C}art}
@@ -691,14 +888,12 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{\c3\ System-Level Fault Recovery}
+\begin{frame}{\c3\ System-Level Fault Recovery (\red{need add blue region})}
   \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{SuperGlueFigs/newerc3}
   \end{figure}
 \end{frame}
-
-\section{\sg}
 
 \begin{frame}{\c3\ Implementation -- Writing Code Manually}
   \only<1>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code1}}%
@@ -716,6 +911,21 @@
     }
   }
 \end{frame}
+
+\section{\sg}
+
+\begin{frame} {\red{TO BE REMOVED - \sg\ overview}}
+Introduce \sg\ (2 pages)
+\begin{itemize}
+\item goal: automatically generate C3 style fault recovery code
+\item idea: from high-level model to low-level mechanism
+\item example: use the lock example to show the goal
+  \begin{itemize}
+  \item needs to change the pic
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}{\sg\ -- IDL-based System-Level Fault Tolerance}
   \begin{columns}
@@ -756,6 +966,40 @@
     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/overview_2}}%
   \end{textblock}
 \end{frame}
+
+
+
+\begin{frame} {\red{TO BE REMOVED - \sg\ design}}
+  Get some details about \sg\ (10 pages)
+  \begin{itemize}
+  \item based on 3 \textbf{observation}
+    \begin{itemize}
+    \item \emph{descriptor-resource model} 8 page
+      \begin{itemize}
+      \item use examples to illustrate the model
+      \item model to IDL
+      \end{itemize}
+    \item \emph{descriptor state machine} 6 pages
+      \begin{itemize}
+      \item use example to illustrate the model
+      \item SM to IDL
+      \end{itemize}
+    \item \emph{categorized recovery mechanisms} 5 pages
+      \begin{itemize}
+      \item recovery mechanisms in C3
+        \begin{itemize}
+        \item use some examples
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  \item link 2 models to categorized recovery mechanisms 5 pages
+    \begin{itemize}
+    \item discuss the code template and predicates
+    \item maybe only show the result w/o details
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
 
 \begin{frame}{Descriptor-Resource Model}
   \begin{textblock}{100}(14,12) \vspace{-0.5em}
@@ -841,6 +1085,17 @@
   \end{textblock}
 \end{frame}
 
+\section{Result and Experiments}
+
+\begin{frame} {\red{TO BE REMOVED - Result}}
+\label{sec-2-1}
+Show some results and experiments here
+\begin{itemize}
+\item LOC comparison (1 page)
+\item fault injection result (needs to add more here) (1 page)
+\item web server results (1 page)
+\end{itemize}
+\end{frame}
 
 \begin{frame}{Code Generation Result}
   \vspace{1em}
@@ -860,12 +1115,14 @@
   }
 \end{frame}
 
-
 \begin{frame}{Web Server Evaluation with Injected Faults}
     \includegraphics[width=1\linewidth]{SuperGlueFigs/WEB}
 \end{frame}
 
-\begin{frame}{Conclusion on \sg}
+
+\section{Conclusion}
+
+\begin{frame}{Conclusion  (need change to something like efficient...)}
   \sg\ -- code generation for system-level fault tolerance
   \begin{itemize}
   \item descriptor-resource \blue{model} and descriptor \blue{state
@@ -873,16 +1130,7 @@
   \item \blue{IDL-based} declarative specifications
   \item \blue{compiler} for synthesizing \c3-style recovery code
   \end{itemize}
-
 \end{frame}
-
-
-\section{Conclusion}
-\begin{frame}
-  \frametitle{Conclusion}
-
-\end{frame}
-
 
 \begin{frame}
   \frametitle{Thanks}

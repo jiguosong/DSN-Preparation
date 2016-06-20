@@ -412,125 +412,120 @@
 
 \begin{document}
 
-\begin{frame} {\red{TO BE REMOVED - Motivation}}
-\label{sec-2-1}
-Motivation (8 pages)
-\begin{itemize}
-\item fault tolerance is important to RTOS and embedded system
-  \begin{itemize}
-  \item safety-critical system
-  \end{itemize}
-\item examples and consequences
-  \begin{itemize}
-  \item Hitomi
-  \item SUA
-  \end{itemize}
-\item more complexity
-  \begin{itemize}
-  \item smaller feature size
-  \item more complex system
-  \item OS can be affected (65\%)
-  \end{itemize}
-\end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - Motivation}}
+% Motivation (8 pages)
+% \begin{itemize}
+% \item fault tolerance is important to RTOS and embedded system
+%   \begin{itemize}
+%   \item safety-critical system
+%   \end{itemize}
+% \item examples and consequences
+%   \begin{itemize}
+%   \item Hitomi
+%   \item SUA
+%   \end{itemize}
+% \item more complexity
+%   \begin{itemize}
+%   \item smaller feature size
+%   \item more complex system
+%   \item OS can be affected (65\%)
+%   \end{itemize}
+% \end{itemize}
+% \end{frame}
 
 
-\begin{frame} {\red{TO BE REMOVED - system-level FT challenges}}
-Why system-level fault tolerance is challenging?
-\begin{itemize}
-\item application-level fault tolerance (3 pages)
-\begin{itemize}
-\item example
-\item checkpoint, N-version\ldots{}
-\end{itemize}
-\item system-level fault tolerance (4 pages)
-\begin{itemize}
-\item scheduler can be affected (examples)
-\item other services as well, such as fs, lock, memory mapping manager
-\item challenges
-\end{itemize}
-\end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - system-level FT challenges}}
+% Why system-level fault tolerance is challenging?
+% \begin{itemize}
+% \item application-level fault tolerance (3 pages)
+% \begin{itemize}
+% \item example
+% \item checkpoint, N-version\ldots{}
+% \end{itemize}
+% \item system-level fault tolerance (4 pages)
+% \begin{itemize}
+% \item scheduler can be affected (examples)
+% \item other services as well, such as fs, lock, memory mapping manager
+% \item challenges
+% \end{itemize}
+% \end{itemize}
+% \end{frame}
 
-\begin{frame} {\red{TO BE REMOVED - \c3}}
-  The {\sc C}omputational {\sc C}rash {\sc C}art
-  \begin{itemize}
-  \item introduce \c3\ at high level (1 page)
-    \begin{itemize}
-    \item maybe need Composite?
-    \end{itemize}
-  \item how \c3 works (4 pages)
-    \begin{itemize}
-    \item fault detection
-    \item micro-reboot and bring the faulty component back to a safe state
-    \item bring the faulty component back to a consistent state using
-      tracked descriptor state at the component interface
-    \end{itemize}
-  \item explain the intelligent code at the component interface (1 page)
-    \begin{itemize}
-    \item explain blue regions
-    \end{itemize}
-  \item start talking the issue with these manually written code (5
-    pages)    
-    \begin{itemize}
-    \item needs larger font
-    \item goal: less error-prone and ease the programmer burden
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - \c3}}
+%   The {\sc C}omputational {\sc C}rash {\sc C}art
+%   \begin{itemize}
+%   \item introduce \c3\ at high level (1 page)
+%     \begin{itemize}
+%     \item maybe need Composite?
+%     \end{itemize}
+%   \item how \c3 works (4 pages)
+%     \begin{itemize}
+%     \item fault detection
+%     \item micro-reboot and bring the faulty component back to a safe state
+%     \item bring the faulty component back to a consistent state using
+%       tracked descriptor state at the component interface
+%     \end{itemize}
+%   \item explain the intelligent code at the component interface (1 page)
+%     \begin{itemize}
+%     \item explain blue regions
+%     \end{itemize}
+%   \item start talking the issue with these manually written code (5
+%     pages)    
+%     \begin{itemize}
+%     \item needs larger font
+%     \item goal: less error-prone and ease the programmer burden
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
 
-\begin{frame} {\red{TO BE REMOVED - \sg\ overview}}
-Introduce \sg\ (2 pages)
-\begin{itemize}
-\item goal: automatically generate C3 style fault recovery code
-\item idea: from high-level model to low-level mechanism
-\item example: use the lock example to show the goal
-  \begin{itemize}
-  \item needs to change the pic
-  \end{itemize}
-\end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - \sg\ overview}}
+% Introduce \sg\ (2 pages)
+% \begin{itemize}
+% \item goal: automatically generate C3 style fault recovery code
+% \item idea: from high-level model to low-level mechanism
+% \item example: use the lock example to show the goal
+%   \begin{itemize}
+%   \item needs to change the pic
+%   \end{itemize}
+% \end{itemize}
+% \end{frame}
 
-\begin{frame} {\red{TO BE REMOVED - \sg\ design}}
-  Get some details about \sg\ (10 pages)
-  \begin{itemize}
-  \item based on 3 \textbf{observation}
-    \begin{itemize}
-    \item \emph{descriptor-resource model} 8 page
-      \begin{itemize}
-      \item use examples to illustrate the model
-      \item model to IDL
-      \end{itemize}
-    \item \emph{descriptor state machine} 6 pages
-      \begin{itemize}
-      \item use example to illustrate the model
-      \item SM to IDL
-      \end{itemize}
-    \item \emph{categorized recovery mechanisms} 5 pages
-      \begin{itemize}
-      \item recovery mechanisms in C3
-        \begin{itemize}
-        \item use some examples
-        \end{itemize}
-      \end{itemize}
-    \end{itemize}
-  \item link 2 models to categorized recovery mechanisms 5 pages
-    \begin{itemize}
-    \item discuss the code template and predicates
-    \item maybe only show the result w/o details
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - \sg\ design}}
+%   Get some details about \sg\ (10 pages)
+%   \begin{itemize}
+%   \item based on 3 \textbf{observation}
+%     \begin{itemize}
+%     \item \emph{descriptor-resource model} 8 page
+%       \begin{itemize}
+%       \item use examples to illustrate the model
+%       \item model to IDL
+%       \end{itemize}
+%     \item \emph{descriptor state machine} 6 pages
+%       \begin{itemize}
+%       \item use example to illustrate the model
+%       \item SM to IDL
+%       \end{itemize}
+%     \item \emph{categorized recovery mechanisms} 5 pages
+%       \begin{itemize}
+%       \item recovery mechanisms in C3 (use some examples)
+%       \end{itemize}
+%     \end{itemize}
+%   \item link 2 models to categorized recovery mechanisms 5 pages
+%     \begin{itemize}
+%     \item discuss the code template and predicates
+%     \item maybe only show the result w/o details
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
 
-\begin{frame} {\red{TO BE REMOVED - \sg\ Result}}
-\label{sec-2-1}
-Show some results and experiments here
-\begin{itemize}
-\item LOC comparison (1 page)
-\item fault injection result (needs to add more here) (1 page)
-\item web server results (1 page)
-\end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - \sg\ Result}}
+% Show some results and experiments here
+% \begin{itemize}
+% \item LOC comparison (1 page)
+% \item fault injection result (needs to add more here) (1 page)
+% \item web server results (1 page)
+% \end{itemize}
+% \end{frame}
 
 
 \begin{frame}[plain]
@@ -547,27 +542,26 @@ Show some results and experiments here
 
 \section{Motivation and Challenges}
 
-\begin{frame} {\red{TO BE REMOVED - Motivation}}
-\label{sec-2-1}
-Motivation (8 pages)
-\begin{itemize}
-\item fault tolerance is important to RTOS and embedded system
-  \begin{itemize}
-  \item safety-critical system
-  \end{itemize}
-\item examples and consequences
-  \begin{itemize}
-  \item Hitomi
-  \item SUA
-  \end{itemize}
-\item more complexity
-  \begin{itemize}
-  \item smaller feature size
-  \item more complex system
-  \item OS can be affected (65\%)
-  \end{itemize}
-\end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - Motivation}}
+% Motivation (8 pages)
+% \begin{itemize}
+% \item fault tolerance is important to RTOS and embedded system
+%   \begin{itemize}
+%   \item safety-critical system
+%   \end{itemize}
+% \item examples and consequences
+%   \begin{itemize}
+%   \item Hitomi
+%   \item SUA
+%   \end{itemize}
+% \item more complexity
+%   \begin{itemize}
+%   \item smaller feature size
+%   \item more complex system
+%   \item OS can be affected (65\%)
+%   \end{itemize}
+% \end{itemize}
+% \end{frame}
 
 
 \begin{frame}
@@ -677,7 +671,7 @@ Motivation (8 pages)
   \frametitle{Embedded faults:  Bad Now, Worse Tomorrow}
   \includegraphics[width=4.3in]{figures/latent/processtechnology/processtech}
 
-  \bigskip
+  \medskip
   Decreasing process sizes $\to$ 5nm
   \begin{itemize}
   \item[{\color{green}+}] faster
@@ -688,22 +682,22 @@ Motivation (8 pages)
   \end{itemize}
 \end{frame}
 
-\begin{frame} {\red{TO BE REMOVED - system-level FT challenges}}
-Why system-level fault tolerance is challenging?
-\begin{itemize}
-\item application-level fault tolerance (3 pages)
-\begin{itemize}
-\item example
-\item checkpoint, N-version\ldots{}
-\end{itemize}
-\item system-level fault tolerance (4 pages)
-\begin{itemize}
-\item scheduler can be affected (examples)
-\item other services as well, such as fs, lock, memory mapping manager
-\item challenges
-\end{itemize}
-\end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - system-level FT challenges}}
+% Why system-level fault tolerance is challenging?
+% \begin{itemize}
+% \item application-level fault tolerance (3 pages)
+% \begin{itemize}
+% \item example
+% \item checkpoint, N-version\ldots{}
+% \end{itemize}
+% \item system-level fault tolerance (4 pages)
+% \begin{itemize}
+% \item scheduler can be affected (examples)
+% \item other services as well, such as fs, lock, memory mapping manager
+% \item challenges
+% \end{itemize}
+% \end{itemize}
+% \end{frame}
 
 \begin{frame}{Application-Level Fault Tolerance}
   \begin{columns}
@@ -751,7 +745,7 @@ Why system-level fault tolerance is challenging?
         \end{itemize}
       \end{itemize}
     \end{column}
-    \begin{column}{0.35\textwidth}
+    \begin{column}{0.4\textwidth}
       \begin{textblock}{40}(85,12)
         \only<1> {\includegraphics[width=1\textwidth]{figures/sys1}}
         \only<2> {\includegraphics[width=1\textwidth]{figures/sys2}}
@@ -775,31 +769,31 @@ Why system-level fault tolerance is challenging?
   }
 \end{frame}
 
-\section{System-Level Fault Recovery - \c3}
+\section{System-Level Fault Recovery}
 
-\begin{frame} {\red{TO BE REMOVED - \c3}}
-  The {\sc C}omputational {\sc C}rash {\sc C}art
-  \begin{itemize}
-  \item introduce \c3\ at high level (1 page)
-  \item how \c3 works (4 pages)
-    \begin{itemize}
-    \item fault detection
-    \item micro-reboot and bring the faulty component back to a safe state
-    \item bring the faulty component back to a consistent state using
-      tracked descriptor state at the component interface
-    \end{itemize}
-  \item explain the intelligent code at the component interface (1 page)
-    \begin{itemize}
-    \item explain blue regions
-    \end{itemize}
-  \item start talking the issue with these manually written code (5
-    pages)    
-    \begin{itemize}
-    \item needs larger font
-    \item goal: less error-prone and ease the programmer burden
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - \c3}}
+%   The {\sc C}omputational {\sc C}rash {\sc C}art
+%   \begin{itemize}
+%   \item introduce \c3\ at high level (1 page)
+%   \item how \c3 works (4 pages)
+%     \begin{itemize}
+%     \item fault detection
+%     \item micro-reboot and bring the faulty component back to a safe state
+%     \item bring the faulty component back to a consistent state using
+%       tracked descriptor state at the component interface
+%     \end{itemize}
+%   \item explain the intelligent code at the component interface (1 page)
+%     \begin{itemize}
+%     \item explain blue regions
+%     \end{itemize}
+%   \item start talking the issue with these manually written code (5
+%     pages)    
+%     \begin{itemize}
+%     \item needs larger font
+%     \item goal: less error-prone and ease the programmer burden
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
 
 \begin{frame}{\c3: The {\sc C}omputational {\sc C}rash {\sc C}art}
   \begin{columns}
@@ -818,16 +812,15 @@ Why system-level fault tolerance is challenging?
   \end{columns}
 
   \bigskip
-  Main ideas
+  \hspace{-0.5cm}Main ideas
   \begin{itemize}
   \item pervasive \blue{fault isolation} $\to$ restrict propagation
   \item efficient \blue{$\mu$-reboot} of individual components
   \item \blue{interface-driven}, application-oblivious recovery
-  \item on-demand recovery $\to$ bound \blue{recovery inversion}
   %\item minimize trusted computing base for fault tolerance
   \end{itemize}
 
-  \bigskip \bigskip \bigskip
+  \smallskip 
 
   \setbeamercolor{block
     title}{use=structure,fg=white,bg=purple!75!black}
@@ -852,47 +845,84 @@ Why system-level fault tolerance is challenging?
   %   }\end{block}
 \end{frame}
 
+\begin{frame}{\cos: A Component-Based OS}
+  \begin{columns}
+    \begin{column}{0.75\textwidth}
+      System functionality as {\em components}
+      \begin{itemize}
+      \item user-level, protection domains
+      \item fine-grained fault isolation
+      \end{itemize}
+      \vspace{0.5em}
+      Low-level services are components 
+      \begin{itemize}
+      \item kernel is small and policy-less
+      \item scheduling, memory mapping, synchronization...are in
+        user level
+      \end{itemize}
+
+      \vspace{0.5em}
+      Component interaction:
+
+      {\em invocation} of exported function
+      \begin{itemize}
+      \item contractually specified interfaces
+      \item function call semantics
+      \end{itemize}
+
+      \vspace{0.5em}
+      Threads orthogonal to components
+      \begin{itemize}
+      \item thread migration -- predictable e2e IPC
+      \item concurrent/parallel components
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \hspace{-3em}
+      \includegraphics[width=1.3\textwidth, height=18em]{figures/component_graph}
+
+      {\scriptsize Example component graph}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
 \begin{frame}{\c3\ System-Level Fault Recovery}
   \begin{columns}
     \begin{column}{0.5\textwidth}
-      Recovery sequence in \c3
+      \onslide<2->{Recovery sequence in \c3}
       \begin{enumerate}
-        \onslide<2->{
+        \onslide<3->{
         \item fault detection
         }
-        \onslide<3->{
+        \onslide<4->{
         \item safe-state recovery
           \begin{itemize}
           \item $\mu$-reboot
           \end{itemize}
         }
-        \onslide<4->{
+        \onslide<5->{
         \item consistent-state recovery
           \begin{itemize}
           \item object state recovery
           \end{itemize}
         }
       \end{enumerate}
-      \vspace{0.5in}
+      \vspace{0.8in}
       \hspace{0.7in}
-      \includegraphics[width=1.2in]{figures/3comp_key}
+      \only<1>{\includegraphics[width=1.2in]{figures/3comp_dsn_key_0}}%
+      \only<2-5>{\includegraphics[width=1.2in]{figures/3comp_dsn_key}}%
     \end{column}
     \begin{column}{0.27\textwidth}
       \begin{textblock}{28}(85,12)
-        \only<1> {\includegraphics[width=1\textwidth]{figures/3comp}}
-        \only<2> {\includegraphics[width=1\textwidth]{figures/3comp2}}
-        \only<3> {\includegraphics[width=1\textwidth]{figures/3comp3}}
-        \only<4> {\includegraphics[width=1\textwidth]{figures/3comp4}}
+        \only<1> {\includegraphics[width=1\textwidth]{figures/3comp_dsn_0}}
+        \only<2> {\includegraphics[width=1\textwidth]{figures/3comp_dsn_1}}
+        \only<3> {\includegraphics[width=1\textwidth]{figures/3comp_dsn_2}}
+        \only<4> {\includegraphics[width=1\textwidth]{figures/3comp_dsn_3}}
+        \only<5> {\includegraphics[width=1\textwidth]{figures/3comp_dsn_4}}
         \end{textblock}
     \end{column}
   \end{columns}
-\end{frame}
-
-\begin{frame}{\c3\ System-Level Fault Recovery (\red{need add blue region})}
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.9\textwidth]{SuperGlueFigs/newerc3}
-  \end{figure}
 \end{frame}
 
 \begin{frame}{\c3\ Implementation -- Writing Code Manually}
@@ -914,17 +944,17 @@ Why system-level fault tolerance is challenging?
 
 \section{\sg}
 
-\begin{frame} {\red{TO BE REMOVED - \sg\ overview}}
-Introduce \sg\ (2 pages)
-\begin{itemize}
-\item goal: automatically generate C3 style fault recovery code
-\item idea: from high-level model to low-level mechanism
-\item example: use the lock example to show the goal
-  \begin{itemize}
-  \item needs to change the pic
-  \end{itemize}
-\end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - \sg\ overview}}
+% Introduce \sg\ (2 pages)
+% \begin{itemize}
+% \item goal: automatically generate C3 style fault recovery code
+% \item idea: from high-level model to low-level mechanism
+% \item example: use the lock example to show the goal
+%   \begin{itemize}
+%   \item needs to change the pic
+%   \end{itemize}
+% \end{itemize}
+% \end{frame}
 
 
 \begin{frame}{\sg\ -- IDL-based System-Level Fault Tolerance}
@@ -933,8 +963,8 @@ Introduce \sg\ (2 pages)
     \begin{column}{0.6\textwidth}
       {\bf \sg}
       \begin{itemize}
-      \item automatically generate interface-driven recovery code
-      \item for system-level services
+      \item automatically generate \c3\ fault recovery code
+      \item for all system-level services
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -942,7 +972,7 @@ Introduce \sg\ (2 pages)
     \end{column}
   \end{columns}
   
-  \bigskip \bigskip \bigskip \bigskip
+  \bigskip \bigskip \bigskip
   \begin{columns}
     \hspace{0em}
     \begin{column}{1.1\textwidth}
@@ -958,161 +988,314 @@ Introduce \sg\ (2 pages)
       \end{itemize}
     \end{column}
   \end{columns}
+
+  \bigskip \bigskip \bigskip \bigskip
+  \setbeamercolor{block
+    title}{use=structure,fg=white,bg=purple!75!black}
+  \setbeamercolor{block
+    body}{use=structure,fg=black,bg=grey!20!white}
+  \begin{block}{\footnotesize Fault Model Assumption (same as \c3)}\scriptsize{  
+      \begin{itemize}
+      \item processor single-event upset and fault is detected
+        immediately ({\sl fail-stop})
+      \item two consecutive faults are separated by the minimum time
+        interval
+      \end{itemize}
+    }\end{block}
+
 \end{frame}
+
+% \begin{frame} {\red{TO BE REMOVED - \sg\ design}}
+%   Get some details about \sg\ (10 pages)
+%   \begin{itemize}
+%   \item based on 3 \textbf{observation}
+%     \begin{itemize}
+%     \item \emph{descriptor-resource model} 8 page
+%       \begin{itemize}
+%       \item use examples to illustrate the model
+%       \item model to IDL
+%       \end{itemize}
+%     \item \emph{descriptor state machine} 6 pages
+%       \begin{itemize}
+%       \item use example to illustrate the model
+%       \item SM to IDL
+%       \end{itemize}
+%     \item \emph{categorized recovery mechanisms} 5 pages
+%       \begin{itemize}
+%       \item recovery mechanisms in C3 (use some examples)
+%       \end{itemize}
+%     \end{itemize}
+%   \item link 2 models to categorized recovery mechanisms 5 pages
+%     \begin{itemize}
+%     \item discuss the code template and predicates
+%     \item maybe only show the result w/o details
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
 
 \begin{frame}{\sg\ -- IDL-based System-Level Fault Tolerance}
-  \begin{textblock}{100}(14,14)
-    %\only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/overview_1}}%
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/overview_2}}%
+  \begin{textblock}{110}(8,14)
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/overview}}%
   \end{textblock}
 \end{frame}
 
+\begin{frame}
+  \frametitle<1-8>{System Model -- Descriptor and Resource}
+  \frametitle<9-15>{System Model -- Component Interface Functions}
+  \begin{textblock}{110}(8,14)
+    \only<1-4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1}}%
+    \only<5-8>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_2}}%
+    \only<9>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
+    \only<10>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_4}}%
+    \only<11-15>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
+  \end{textblock}
+  \begin{textblock}{52}(72,15)
+    \only<1-8>{{\it Descriptor}}
+    \begin{itemize}
+      \only<2-8>{\item accessed locally or globally}
+      \only<3-8>{\item meta data}
+      \only<4-8>{\item dependent descriptor}
+    \end{itemize}
+    \only<5-8>{{\it Resource}}
+    \begin{itemize}
+      \only<6-8>{\item thread can block}
+      \only<7-8>{\item meta data}
+    \end{itemize}
+    \only<9->{{\it Component Interface Functions}}
+    \begin{itemize}
+      \only<11->{\item create descriptor}
+      \only<12->{\item terminate descriptor}
+      \only<13->{\item block invoking thread}
+      \only<14->{\item wake up thread}
+    \end{itemize}
+  \end{textblock}
+  \begin{textblock}{120}(10,88)
+    \only<8,15> {\Large {\it lock, scheduler, memory manager, file
+        system, event...}}
+  \end{textblock}
+\end{frame}
 
+\begin{frame}{System Model in IDL-based Specification}
+  \begin{textblock}{110}(8,14)
+    \only<1-2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_5}}%
+  \end{textblock}
+  \begin{textblock}{96}(12,85)\only<1> {\large {\bf ``descriptor and
+        resource'' + ``interface functions'' $\rightarrow$ described
+        using IDL}}
+  \end{textblock}
+  \begin{textblock}{96}(12,85) \only<2> {\large {\bf ``descriptor and
+        resource'' + ``interface functions'' $\rightarrow$ described
+        using IDL \color{red} in average 37 LOC}}
+  \end{textblock}
+\end{frame}
 
-\begin{frame} {\red{TO BE REMOVED - \sg\ design}}
-  Get some details about \sg\ (10 pages)
+\begin{frame}{Set of Recovery Mechanisms in \c3}
+  \begin{textblock}{110}(8,14)
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_6}}%
+    \only<2-3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_7}}%
+    \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_8}}%
+    \only<5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_9}}%
+    \only<6-7>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_10}}%
+  \end{textblock}
+  \begin{textblock}{80}(45,16)
+    \only<2->{{\it \color{blue} Basic Recovery}}
+    \begin{itemize}
+      \only<2->{\item always through component operation}
+    \end{itemize}
+    \only<3->{{\it \color{blue} Timing of Recovery}}
+    \begin{itemize}
+      \only<3->{\item on-demand: recover only when access}
+      \only<4->{\item eager: wake up all blocking threads}
+    \end{itemize}
+    \only<5->{{\it \color{blue} Recovery with Dependency}}
+    \begin{itemize}
+      \only<5->{\item recover parent or children descriptor}
+    \end{itemize}
+    \only<6->{{\it {\color{blue} Recovery with Storage}}}
+    \begin{itemize}
+      \only<6->{\item recover data}
+    \end{itemize}
+    \only<6->{{\it {\color{blue} Recovery with Upcall}}}
+    \begin{itemize}
+      \only<6->{\item upcall into client component for recovery}
+    \end{itemize}
+  \end{textblock}
+  \begin{textblock}{120}(10,88)
+    \only<7> {\Large {\it lock, scheduler, memory manager, file
+        system, event...}}
+  \end{textblock}
+\end{frame}
+
+\begin{frame}{System Model $\rightarrow$ Recovery Mechanisms}
+  \begin{textblock}{110}(5,17)
+    \only<1-3>{\includegraphics[width=1.1\linewidth]{SuperGlueFigs/design/dsn/design_1_11}}%
+  \end{textblock}
+
+  \PutAt<2>{(1cm,3.5cm)}{ \ColorBox[text width=10.5cm]{ \LARGE {which
+        recovery mechanisms to use?  how to
+        generate the recovery code?\\}}}
+
+  \PutAt<3>{(1cm,3.5cm)}{ \ColorBox[text width=10.5cm]{ \LARGE {which
+        recovery mechanisms to use?  how to
+        generate the recovery code?\\
+        \vspace{0.4cm} {\bf Idea:} evaluate predicates and generate
+        the code from a set of chosen code templates}}}
+\end{frame}
+
+\begin{frame}{Example -- Client Invocation Stub}
+  \vspace{-4cm}
   \begin{itemize}
-  \item based on 3 \textbf{observation}
-    \begin{itemize}
-    \item \emph{descriptor-resource model} 8 page
-      \begin{itemize}
-      \item use examples to illustrate the model
-      \item model to IDL
-      \end{itemize}
-    \item \emph{descriptor state machine} 6 pages
-      \begin{itemize}
-      \item use example to illustrate the model
-      \item SM to IDL
-      \end{itemize}
-    \item \emph{categorized recovery mechanisms} 5 pages
-      \begin{itemize}
-      \item recovery mechanisms in C3
-        \begin{itemize}
-        \item use some examples
-        \end{itemize}
-      \end{itemize}
-    \end{itemize}
-  \item link 2 models to categorized recovery mechanisms 5 pages
-    \begin{itemize}
-    \item discuss the code template and predicates
-    \item maybe only show the result w/o details
-    \end{itemize}
+  \item Predicate $\Rightarrow$ {\it ``true''} 
+  \item Code Template $\Rightarrow$
   \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Descriptor-Resource Model}
-  \begin{textblock}{100}(14,12) \vspace{-0.5em}
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_1}}%
-    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_2}}%
-    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_3}}%
-    \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_4}}%
-    \only<5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_5}}%
-    \only<6>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_6}}%
-    \only<7>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_6_1}}%
-  \end{textblock}
-\end{frame}
-\begin{frame}{Descriptor-Resource Model $\to$ IDL}
-  \begin{textblock}{100}(14,12) \vspace{-0.5em}
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_1}}%
+  \begin{textblock}{90}(20,32)
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/code_tmplate1}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/code_tmplate2}}%
   \end{textblock}
 \end{frame}
 
-\begin{frame}{Component Interface Function}
-  \begin{textblock}{100}(14,12) \vspace{-0.5em}
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_7}}%
-    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_8}}%
-    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_9}}%
+\begin{frame}{Example -- Client Stub Descriptor State Tracking}
+  \vspace{-4cm}
+  \begin{itemize}
+  \item Predicate $\Rightarrow$ {\it ``the interface function can create
+      descriptor and the descriptor is not accessed between
+      components''}
+  \item Code Template $\Rightarrow$
+  \end{itemize}
+  \begin{textblock}{90}(20,32)
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/code_tmplate3}}%
   \end{textblock}
 \end{frame}
-% \begin{frame}{Interface Functions $\to$ IDL}
+
+\begin{frame}{Example -- Generated Recovery Code Snippet}
+  \begin{textblock}{90}(20,11)
+    \only<1-2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/code_result1}}%
+  \end{textblock}
+  \begin{textblock}{120}(10,88) \only<2> {\Large {\it lock, scheduler,
+        memory manager, file system, event...}}
+  \end{textblock}
+\end{frame}
+
+
+% \begin{frame}{Toward Generating Recovery Code}
 %   \begin{textblock}{100}(14,12) \vspace{-0.5em}
-%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_2}}%
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_5}}%
+%     %\only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_6}}%
+%     \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_7}}%
 %   \end{textblock}
 % \end{frame}
 
-\begin{frame}{Descriptor State Machine}
-  \begin{textblock}{100}(14,12) \vspace{-0.5em}
-    %\only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_10}}%
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_11}}%
-  \end{textblock}
-\end{frame}
-\begin{frame}{Descriptor State Machine $\to$ IDL}
-  \begin{textblock}{100}(14,12) \vspace{-0.5em}
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_3}}%
-  \end{textblock}
-\end{frame}
+% \begin{frame}{Interface-Driven Recovery Mechanisms}
+%   \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_0}}%
+%   \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_1}}%
+%   \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_2}}%
+%   %\only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_3}}%
+%   \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_4}}%
+%   \only<5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_4_SM}}%
+% \end{frame}
 
-\begin{frame}{IDL-based Specification}
-  \begin{textblock}{100}(14,12) \vspace{-0.5em}
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_4}}%
-  \end{textblock}
-\end{frame}
+%\begin{frame}{Model $\to$ Recovery Mechanisms}
+%  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_5}}%
+%\end{frame}
 
-\begin{frame}{Toward Generating Recovery Code}
-  \begin{textblock}{100}(14,12) \vspace{-0.5em}
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_5}}%
-    %\only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_6}}%
-    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_7}}%
-  \end{textblock}
-\end{frame}
+% \begin{frame}{Synthesize the Recovery Code}
+%   \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_6}}%
+%   \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_7}}%
+%   \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_8}}%
+%   \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_9}}%
+% \end{frame}
 
-\begin{frame}{Interface-Driven Recovery Mechanisms}
-  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_0}}%
-  \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_1}}%
-  \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_2}}%
-  %\only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_3}}%
-  \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_4}}%
-  \only<5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_4_SM}}%
-\end{frame}
-
-\begin{frame}{Model $\to$ Recovery Mechanisms}
-  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_5}}%
-\end{frame}
-
-\begin{frame}{Synthesize the Recovery Code}
-  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_6}}%
-  \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_7}}%
-  \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_8}}%
-  \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_9}}%
-\end{frame}
-
-\begin{frame}{Generate Recovery Code}
-  \begin{textblock}{100}(14,12) \vspace{-0.5em}
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_4_1}}%
-    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_4_2}}%
-    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_4_3}}%
-  \end{textblock}
-\end{frame}
+% \begin{frame}{Generate Recovery Code}
+%   \begin{textblock}{100}(14,12) \vspace{-0.5em}
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_4_1}}%
+%     \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_4_2}}%
+%     \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_4_3}}%
+%   \end{textblock}
+% \end{frame}
 
 \section{Result and Experiments}
 
-\begin{frame} {\red{TO BE REMOVED - Result}}
-\label{sec-2-1}
-Show some results and experiments here
-\begin{itemize}
-\item LOC comparison (1 page)
-\item fault injection result (needs to add more here) (1 page)
-\item web server results (1 page)
-\end{itemize}
-\end{frame}
+% \begin{frame} {\red{TO BE REMOVED - Result}}
+% Show some results and experiments here
+% \begin{itemize}
+% \item LOC comparison (1 page)
+% \item fault injection result (needs to add more here) (1 page)
+% \item web server results (1 page)
+% \end{itemize}
+% \end{frame}
 
 \begin{frame}{Code Generation Result}
   \vspace{1em}
   \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/loc_new}}%
 \end{frame}
 
-\begin{frame}{Fault Injection Result}
-  \vspace{1em}
-  \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/loc_new_gray}}%
-  
-  \PutAt<1>{(7cm,5.2cm)}{
-    \ColorBox[text width=4cm]{
-      \begin{center}
-        \includegraphics[width=1\linewidth]{SuperGlueFigs/SWIFI}
-      \end{center} 
-    }
-  }
+% \begin{frame}{Fault Injection Campaign Result}
+%   \vspace{1em}
+%   \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/loc_new_gray}}%
+%   \PutAt<1>{(7cm,5.2cm)}{
+%     \ColorBox[text width=4cm]{
+%       \begin{center}
+%         \includegraphics[width=1\linewidth]{SuperGlueFigs/SWIFI}
+%       \end{center} 
+%     }
+%   }
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Fault Injection Experiments Setup}
+  \begin{itemize}
+  \item \sg\ implemented in {\em Composite} component-based OS
+    \begin{itemize}
+    \item Intel i7-2760QM, running at 2.4 Ghz
+    \end{itemize}
+  \item 6 services evaluated:
+    \begin{itemize}
+    \item the system scheduler (Sched)
+    \item the system physical memory manager and mapper (MM)
+    \item a RAM-based file system (FS)
+    \item the lock manager (Lock)
+    \item the system event manager (Event)
+    \item the system timer manager (Timer)
+    \end{itemize}
+  \item Transient faults (processor single-event upsets)
+    \begin{itemize}
+    \item modeled as random register bit-flips (SWIFI)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Fault Injection Campaign Results}
+\bigskip
+\begin{table*}
+  % \footnotesize
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      \specialcell{System \\ Component} & \specialcell{Injected} &
+      \specialcell{Fault\\ Activation Ratio} &
+      \specialcell{Recovery \\ Success Rate}\\
+      \hline
+      \textbf{Sched}   & 500 & $98.36\%$ & $88.58\%$\\
+      \hline
+      \textbf{MM}      & 500 & $94.26\%$ &$91.48\%$\\
+      \hline
+      \textbf{FS}      & 500 &  $94.7\%$ &$96.14\%$\\
+      \hline
+      \textbf{Lock}    & 500 & $93.82\%$ &$92.35\%$\\
+      \hline
+      \textbf{Event}   & 500 & $93.83\%$ &$96\%$\\
+      \hline
+      \textbf{Timer}   & 500 & $97.23\%$ &$94.62\%$\\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table*}
+
+  \medskip
+  \begin{itemize}
+  \item[\ast] fault activation ratio = activated faults/injected faults
+  \item[\ast] recovery success ratio = recovered faults/activated faults
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Web Server Evaluation with Injected Faults}
@@ -1122,13 +1305,12 @@ Show some results and experiments here
 
 \section{Conclusion}
 
-\begin{frame}{Conclusion  (need change to something like efficient...)}
-  \sg\ -- code generation for system-level fault tolerance
+\begin{frame}{Conclusion}
+  \sg\ -- system-level fault tolerance code generation
   \begin{itemize}
-  \item descriptor-resource \blue{model} and descriptor \blue{state
-      machine}
-  \item \blue{IDL-based} declarative specifications
-  \item \blue{compiler} for synthesizing \c3-style recovery code
+  \item synthesizes recovery code from the high-level system model
+  \item effectively eases the programmer burden
+  \item efficient and predictable system-level fault recovery
   \end{itemize}
 \end{frame}
 
@@ -1601,3 +1783,97 @@ Show some results and experiments here
 \fi   % this will include all extra sides
 
 \end{document}
+
+
+  % \begin{columns}
+  %   \begin{column}{0.6\textwidth}
+  %   \end{column}
+  %   \begin{column}{0.4\textwidth}
+  %   \end{column}
+  % \end{columns}
+
+
+% \begin{frame}{Observation 1: Descriptor and Resource}
+%   \begin{textblock}{105}(10,14)
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1}}%
+%     \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_2}}%
+%     \only<3-4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
+%   \end{textblock}
+%   \begin{textblock}{120}(10,85)
+%     \only<4> {\Large {\it lock, scheduler, memory manager, file system, event...}}
+%   \end{textblock}
+% \end{frame}
+
+% \begin{frame}{Observation 2: Component Interface Function}
+%   \begin{textblock}{105}(10,14)
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_2_1}}%
+%     \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_2_2}}%
+%     \only<3-4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_2_3}}%
+%   \end{textblock}
+%   \begin{textblock}{120}(10,85)
+%     \only<4> {\Large {\it lock, scheduler, memory manager, file system, event...}}
+%   \end{textblock}
+% \end{frame}
+
+% \begin{frame}{Observations 3: \c3\ Recovery Mechanisms}
+%   \begin{textblock}{105}(10,14)
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_3_1}}%
+%     \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_3_2}}%
+%     \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_3_3}}%
+%     \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_3_4}}%
+%   \end{textblock}
+%   \begin{textblock}{120}(10,85)
+%     \only<4> {\Large {\it lock, scheduler, memory manager, file system, event...}}
+%   \end{textblock}
+% \end{frame}
+
+
+% \begin{frame}{Observation 1 + 2 $\rightarrow$ Observation 3}
+%   \begin{textblock}{105}(10,14)
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_5}}%
+%     \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_3_6}}%
+%   \end{textblock}
+% \end{frame}
+
+
+% \begin{frame}{Descriptor-Resource Model}
+%   \begin{textblock}{100}(14,12) \vspace{-0.5em}
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_1}}%
+%     \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_2}}%
+%     \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_3}}%
+%     \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_4}}%
+%     \only<5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_5}}%
+%     \only<6>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_6}}%
+%     \only<7>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_6_1}}%
+%   \end{textblock}
+% \end{frame}
+% \begin{frame}{Descriptor-Resource Model $\to$ IDL}
+%   \begin{textblock}{100}(14,12) \vspace{-0.5em}
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_1}}%
+%   \end{textblock}
+% \end{frame}
+
+% \begin{frame}{Component Interface Function}
+%   \begin{textblock}{100}(14,12) \vspace{-0.5em}
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_7}}%
+%     \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_8}}%
+%     \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_9}}%
+%   \end{textblock}
+% \end{frame}
+% % \begin{frame}{Interface Functions $\to$ IDL}
+% %   \begin{textblock}{100}(14,12) \vspace{-0.5em}
+% %     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_2}}%
+% %   \end{textblock}
+% % \end{frame}
+
+% \begin{frame}{Descriptor State Machine}
+%   \begin{textblock}{100}(14,12) \vspace{-0.5em}
+%     %\only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_10}}%
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_1_11}}%
+%   \end{textblock}
+% \end{frame}
+% \begin{frame}{Descriptor State Machine $\to$ IDL}
+%   \begin{textblock}{100}(14,12) \vspace{-0.5em}
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/design_2_3}}%
+%   \end{textblock}
+% \end{frame}

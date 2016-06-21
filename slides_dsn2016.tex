@@ -1018,40 +1018,43 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle<1-8>{System Model -- Descriptor and Resource}
-  \frametitle<9-15>{System Model -- Component Interface Functions}
+  \frametitle<1-9>{System Model -- Descriptor and Resource}
+  \frametitle<10-16>{System Model -- Component Interface Functions}
   \begin{textblock}{110}(8,14)
-    \only<1-4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1}}%
-    \only<5-8>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_2}}%
-    \only<9>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
-    \only<10>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_4}}%
-    \only<11>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_0}}%
-    \only<12>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_1}}%
-    \only<13>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_2}}%
-    \only<14-15>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
+    \only<1-2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1}}%
+    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1_global}}%
+    \only<4-5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1}}%
+    \only<6-9>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_2}}%
+    \only<10>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
+    \only<11>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_4}}%
+    \only<12>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_0}}%
+    \only<13>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_1}}%
+    \only<14>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_2}}%
+    \only<15-16>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
   \end{textblock}
   \begin{textblock}{52}(72,15)
-    \only<2-8>{{\it Descriptor}}
+    \only<1-9>{{\it Descriptor}}
     \begin{itemize}
-      \only<2-8>{\item accessed locally or globally}
-      \only<3-8>{\item meta data}
-      \only<4-8>{\item dependent descriptor}
+      \only<2-9>{\item accessed within the same component}
+      \only<3-9>{\item accessed by multiple components}
+      \only<4-9>{\item meta data}
+      \only<5-9>{\item dependent descriptor}
     \end{itemize}
-    \only<5-8>{{\it Resource}}
+    \only<6-9>{{\it Resource}}
     \begin{itemize}
-      \only<6-8>{\item thread can block}
-      \only<7-8>{\item meta data}
+      \only<7-9>{\item thread can block}
+      \only<8-9>{\item meta data}
     \end{itemize}
-    \only<11->{{\it Interface Function Types}}
+    \only<12->{{\it Interface Function Types}}
     \begin{itemize}
-      \only<11->{\item create descriptor}
-      \only<12->{\item terminate descriptor}
-      \only<13->{\item block invoking thread}
-      \only<14->{\item wake up thread}
+      \only<12->{\item create descriptor}
+      \only<13->{\item terminate descriptor}
+      \only<14->{\item block invoking thread}
+      \only<15->{\item wake up thread}
     \end{itemize}
   \end{textblock}
   \begin{textblock}{120}(10,88)
-    \only<8,15> {\Large {\it lock, scheduler, memory manager, file
+    \only<9,16> {\Large {\it lock, scheduler, memory manager, file
         system, event...}}
   \end{textblock}
 \end{frame}

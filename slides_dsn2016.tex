@@ -675,7 +675,7 @@
   Decreasing process sizes $\to$ 5nm
   \begin{itemize}
   \item[{\color{green}+}] faster
-  \item[{\color{green}+}] less power
+  \item[{\color{green}+}] less power consumption
   \item[{\color{green}+}] smaller
   \item[{\color{red}--}] increased vulnerability to HW transient
     faults
@@ -1074,7 +1074,7 @@
   \end{textblock}
 \end{frame}
 
-\begin{frame}{Set of Recovery Mechanisms in \c3}
+\begin{frame}{Types of Recovery Mechanisms in \c3}
   \begin{textblock}{110}(8,14)
     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_6}}%
     \only<2-3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_7}}%
@@ -1130,7 +1130,7 @@
 \begin{frame}{Example -- Client Invocation Stub}
   \vspace{-4cm}
   \begin{itemize}
-  \item Predicate $\Rightarrow$ {\it ``true''} 
+  \item Predicate $\Rightarrow$ {\it ``always through component operation''} 
   \item Code Template $\Rightarrow$
   \end{itemize}
   \begin{textblock}{90}(20,32)
@@ -1142,8 +1142,8 @@
 \begin{frame}{Example -- Client Stub Descriptor State Tracking}
   \vspace{-4cm}
   \begin{itemize}
-  \item Predicate $\Rightarrow$ {\it ``the interface function can create
-      descriptor and the descriptor is not accessed between
+  \item Predicate $\Rightarrow$ {\it ``the interface function creates
+      descriptor AND the descriptor is not accessed between
       components''}
   \item Code Template $\Rightarrow$
   \end{itemize}

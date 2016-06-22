@@ -385,11 +385,12 @@
 }
 
 \makeatother
-%\author{Presented by {\bf Jiguo Song}}
+\author{Jiguo Song, Gedare Bloom, Gabriel Parmer \\Presented by {\bf Teodor Georgiev}}
+%\author{Presented by {\bf Teodor Georgiev}}
 \title{\textbf{SuperGlue: IDL-Based, System-Level Fault Tolerance for
     Embedded Systems}}
 \institute{\footnotesize Computer Science Department \\ The George Washington University}
-\date{\today}
+\date{June 30, 2016}
 %\titlegraphicii{\includegraphics[height=1.4cm,width=2cm]{gwu2}}
 
 \usepackage{transparent}% http://ctan.org/pkg/transparent
@@ -949,6 +950,12 @@
       \begin{itemize}
       \item automatically generate \c3\ fault recovery code
       \item for all system-level services
+      \item a system \blue{model} and \blue{interface description
+          language (IDL)}
+      %\item The \blue{mapping} from the model to the recovery
+      %  mechanisms
+      \item an \blue{IDL compiler} synthesizes recovery code from the
+        model
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -960,23 +967,23 @@
   \begin{columns}
     \hspace{0em}
     \begin{column}{1.1\textwidth}
-      Main ideas
-      % \begin{list}{$\blacksquare$}{\leftmargin=1em \itemindent=0em}
-      \begin{itemize}
-      \item a system \blue{model} and \blue{interface description
-          language (IDL)}
-      %\item The \blue{mapping} from the model to the recovery
-      %  mechanisms
-      \item an \blue{IDL compiler} synthesizes recovery code from the
-        model
-      \end{itemize}
+      % Main ideas
+      % % \begin{list}{$\blacksquare$}{\leftmargin=1em \itemindent=0em}
+      % \begin{itemize}
+      % \item a system \blue{model} and \blue{interface description
+      %     language (IDL)}
+      % %\item The \blue{mapping} from the model to the recovery
+      % %  mechanisms
+      % \item an \blue{IDL compiler} synthesizes recovery code from the
+      %   model
+      % \end{itemize}
 
       \bigskip \bigskip
 
       Fault Model (same as \c3): 
       \begin{itemize}
-      \item processor SEUs and fault is detected immediately ({\sl
-          fail-stop})
+      \item on-chip SEUs
+      \item fault is detected immediately ({\sl fail-stop})
       \end{itemize}
     \end{column}
   \end{columns}
@@ -1013,50 +1020,101 @@
 
 \begin{frame}{\sg\ -- IDL-based System-Level Fault Tolerance}
   \begin{textblock}{110}(8,14)
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/overview}}%
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/overview_1}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/overview_2}}%
+    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/overview_3}}%
   \end{textblock}
 \end{frame}
 
 \begin{frame}
-  \frametitle<1-9>{System Model -- Descriptor and Resource}
-  \frametitle<10-16>{System Model -- Component Interface Functions}
+  \frametitle<1-2>{Interface Description Model -- Descriptor and Resource}
   \begin{textblock}{110}(8,14)
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1_0}}%
-    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1}}%
-    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1_global}}%
-    \only<4-5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_1}}%
-    \only<6-9>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_2}}%
-    \only<10>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
-    \only<11>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_4}}%
-    \only<12>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_0}}%
-    \only<13>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_1}}%
-    \only<14>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_2}}%
-    \only<15-16>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_fs_no_res}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_fs_interface_funcs}}%    
+    %\only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_fs}}%
   \end{textblock}
   \begin{textblock}{52}(72,15)
-    \only<2-9>{{\it Descriptor}}
     \begin{itemize}
-      \only<2-9>{\item accessed within the same component}
-      \only<3-9>{\item accessed by multiple components}
-      \only<4-9>{\item meta data}
-      \only<5-9>{\item dependent descriptor}
+      \only<1->{\item File descriptor (descriptor)}
     \end{itemize}
-    \only<6-9>{{\it Resource}}
     \begin{itemize}
-      \only<7-9>{\item thread can block}
-      \only<8-9>{\item meta data}
+      \only<2->{\item Interface functions operate on the file
+        descriptor}
+      \begin{itemize}
+        \only<2->{\item open/close file, read/write file...}
+      \end{itemize}
     \end{itemize}
-    \only<12->{{\it Interface Function Types}}
-    \begin{itemize}
-      \only<12->{\item create descriptor}
-      \only<13->{\item terminate descriptor}
-      \only<14->{\item block invoking thread}
-      \only<15->{\item wake up thread}
-    \end{itemize}
+    %\begin{itemize}
+     % \only<3>{\item Access the file (resource)}
+    %\end{itemize}
   \end{textblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle<1-2>{Interface Description Model -- Descriptor and Resource}
+  \begin{textblock}{110}(8,14)
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_thread_no_res}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_thread_interface_funcs}}%    
+    %\only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_thread}}%
+  \end{textblock}
+  \begin{textblock}{52}(72,15)
+    \begin{itemize}
+      \only<1->{\item Thread id (descriptor)}
+    \end{itemize}
+    \begin{itemize}
+      \only<2->{\item Interface functions operate on thread
+        descriptor}
+      \begin{itemize}
+        \only<2->{\item block/wake up thread...}
+      \end{itemize}
+    \end{itemize}
+    %\begin{itemize}
+     % \only<3>{\item Access the thread (resource)}
+    %\end{itemize}
+  \end{textblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle<1-6>{Interface Description Model -- Descriptor and
+    Resource}
+  \begin{textblock}{110}(8,14)
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_lock_no_res}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_lock_interface_funcs}}%    
+    %\only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_lock}}%
+    \only<3-4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_lock_SM}}% 
+    \only<5-6>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_lock}}% 
+  \end{textblock}
+  \begin{textblock}{52}(72,15)
+    \begin{itemize}
+      \only<1-2, 5-6>{\item Lock id (descriptor)}
+    \end{itemize}
+    \begin{itemize}
+      \only<2, 5-6>{\item Interface functions operate on lock descriptor}
+      \begin{itemize}
+        \only<2, 5-6>{\item take/release lock...}
+      \end{itemize}
+    \end{itemize}
+    \begin{itemize}
+      \only<5-6>{\item Access the synchronization (resource)}
+    \end{itemize}
+
+  \PutAt<6>{(3.8cm,7.3cm)}{
+    \NormalBox[text width=7.9cm]{
+      \footnotesize{
+        \begin{itemize}
+        \item descriptor can be accessed by multiple components
+        \item thread can block when access a resource
+        \item ...
+        \end{itemize}
+      }
+    }
+  }
+
   \begin{textblock}{120}(10,88)
-    \only<9,16> {\Large {\it lock, scheduler, memory manager, file
+    \only<4> {\Large {\it lock, scheduler, memory manager, file
         system, event...}}
+  \end{textblock}
+    
   \end{textblock}
 \end{frame}
 
@@ -1074,39 +1132,67 @@
   \end{textblock}
 \end{frame}
 
-\begin{frame}{Types of Recovery Mechanisms in \c3}
+
+\begin{frame}
+  \frametitle<1-5>{Component Interface Function Types}
   \begin{textblock}{110}(8,14)
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_6}}%
-    \only<2-3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_7}}%
-    \only<4>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_8}}%
-    \only<5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_9}}%
-    \only<6-7>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_10}}%
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_0}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_1}}%
+    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3_2}}%
+    \only<4-5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/design_1_3}}%
+  \end{textblock}
+  
+  \begin{textblock}{52}(72,15)
+    \begin{itemize}
+      \only<1->{\item create new descriptor}
+      \only<2->{\item terminate descriptor}
+      \only<3->{\item block invoking thread}
+      \only<4->{\item wake up blocking thread}
+    \end{itemize}
+  \end{textblock}
+
+  \begin{textblock}{120}(10,88)
+    \only<5> {\Large {\it lock, scheduler, memory manager, file
+        system, event...}}
+  \end{textblock}
+\end{frame}
+
+
+\begin{frame}{\sg\ -- IDL-based System-Level Fault Tolerance}
+  \begin{textblock}{110}(8,14)
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/overview_4}}%
+  \end{textblock}
+\end{frame}
+
+\begin{frame}{Fault Recovery Model}
+  \begin{textblock}{110}(8,14)
+    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/recovery_detection}}%
+    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/recovery_basic}}%
+    \only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/recovery_dependency}}%
+    \only<4-5>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/recovery_all_in_one}}%
   \end{textblock}
   \begin{textblock}{80}(45,16)
-    \only<2->{{\it \color{blue} Basic Recovery}}
+    \only<2->{\item {\it \color{blue} Basic Recovery}}
     \begin{itemize}
       \only<2->{\item always through component operation}
     \end{itemize}
-    \only<3->{{\it \color{blue} Timing of Recovery}}
+    \only<3->{{\it \color{blue} Recovery with Dependency}}
     \begin{itemize}
-      \only<3->{\item on-demand: recover only when access}
+      \only<3->{
+      \item recover the dependency descriptor first
+      \item e.g., {\it new\_fd = accept(fd)}.  Descriptor {\it fd}
+        must be recovered before {\it new\_fd}}
+    \end{itemize}
+    \only<4->{{\it \color{blue} Timing of Recovery}}
+    \begin{itemize}
+      \only<4->{\item on-demand: recover only when access}
       \only<4->{\item eager: wake up all blocking threads}
     \end{itemize}
-    \only<5->{{\it \color{blue} Recovery with Dependency}}
-    \begin{itemize}
-      \only<5->{\item recover parent or children descriptor}
-    \end{itemize}
-    \only<6->{{\it {\color{blue} Recovery with Storage}}}
-    \begin{itemize}
-      \only<6->{\item recover data}
-    \end{itemize}
-    \only<6->{{\it {\color{blue} Recovery with Upcall}}}
-    \begin{itemize}
-      \only<6->{\item upcall into client component for recovery}
-    \end{itemize}
+    \only<4->{{\it {\color{blue} Recovery with Data Storage}}}\\
+    \only<4->{{\it {\color{blue} Recovery with Upcall}}}
   \end{textblock}
   \begin{textblock}{120}(10,88)
-    \only<7> {\Large {\it lock, scheduler, memory manager, file
+    \only<5> {\Large {\it lock, scheduler, memory manager, file
         system, event...}}
   \end{textblock}
 \end{frame}
@@ -1116,21 +1202,20 @@
     \only<1-3>{\includegraphics[width=1.1\linewidth]{SuperGlueFigs/design/dsn/design_1_11}}%
   \end{textblock}
 
-  \PutAt<2>{(1cm,3.5cm)}{ \ColorBox[text width=10.5cm]{ \LARGE {which
-        recovery mechanisms to use?  how to
-        generate the recovery code?\\}}}
+  \PutAt<2>{(1.6cm,3.5cm)}{ \ColorBox[text width=9cm]{ \LARGE {Which
+        recovery mechanisms to use?\\ How to generate the recovery
+        code?\\}}}
 
-  \PutAt<3>{(1cm,3.5cm)}{ \ColorBox[text width=10.5cm]{ \LARGE {which
-        recovery mechanisms to use?  how to
-        generate the recovery code?\\
-        \vspace{0.4cm} {\bf Idea:} evaluate predicates and generate
-        the code from a set of chosen code templates}}}
+  \PutAt<3>{(1.6cm,3.5cm)}{ \ColorBox[text width=9cm]{ \LARGE {Which
+        recovery mechanisms to use?\\ How to generate the recovery code?\\
+        \vspace{0.4cm} {\bf Idea:} an IDL compiler parses IDL
+        specifications and generates the code}}}
 \end{frame}
 
 \begin{frame}{Example -- Client Invocation Stub}
   \vspace{-4cm}
   \begin{itemize}
-  \item Predicate $\Rightarrow$ {\it ``always through component operation''} 
+  \item Predicate $\Rightarrow$ {\it ``always included''} 
   \item Code Template $\Rightarrow$
   \end{itemize}
   \begin{textblock}{90}(20,32)
@@ -1231,17 +1316,17 @@
 \bigskip
   \begin{itemize}
   \item \sg\ implemented in {\em Composite} component-based OS
+  \item Transient faults modeled as random register bit-flips
     \begin{itemize}
-    \item Intel i7-2760QM, running at 2.4 Ghz
+    \item Software-implemented Fault Injection (SWIFI)
     \end{itemize}
-  \item Transient faults modeled as random register bit-flips (SWIFI)
   \end{itemize}
-
-\begin{table*}
-  % \footnotesize
-  \begin{center}
-    \begin{tabular}{|c|c|c|c|}
-      \hline
+  
+  \begin{table*}
+    % \footnotesize
+    \begin{center}
+      \begin{tabular}{|c|c|c|c|}
+        \hline
       \specialcell{System \\ Component} & \specialcell{Injected} &
       \specialcell{Fault\\ Activation Ratio} &
       \specialcell{Recovery \\ Success Rate}\\
@@ -1262,22 +1347,22 @@
   \end{center}
 \end{table*}
 
-  \medskip
-  \begin{itemize}
-  \item[\ast] fault activation ratio = activated faults/injected faults
-  \item[\ast] recovery success ratio = recovered faults/activated faults
+\medskip
+\begin{itemize}
+\item[\ast] fault activation ratio = activated faults/injected faults
+\item[\ast] recovery success ratio = recovered faults/activated faults
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Web Server Evaluation with Injected Faults}
-    \includegraphics[width=1\linewidth]{SuperGlueFigs/WEB}
+    \includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/WEB}
 \end{frame}
 
 
 \section{Conclusion}
 
 \begin{frame}{Conclusion}
-  \sg\ -- system-level fault tolerance code generation
+  \sg\ -- code generation for system-level fault tolerance 
   \begin{itemize}
   \item synthesizes recovery code from the high-level system model
   \item effectively eases the programmer burden

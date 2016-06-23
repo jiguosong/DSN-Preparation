@@ -385,7 +385,7 @@
 }
 
 \makeatother
-\author{Jiguo Song, Gedare Bloom, Gabriel Parmer \\Presented by {\bf Teodor Georgiev}}
+\author{Jiguo Song, Gedare Bloom, Gabriel Parmer \\Presented by {\bf Teo Georgiev}}
 %\author{Presented by {\bf Teodor Georgiev}}
 \title{\textbf{SuperGlue: IDL-Based, System-Level Fault Tolerance for
     Embedded Systems}}
@@ -721,8 +721,8 @@
     \end{column}
     \begin{column}{0.35\textwidth}
       \vspace{-3em}
-      \only<1,3>{\includegraphics[width=1\textwidth]{figures/app1}}
-      \only<2>{\includegraphics[width=1\textwidth]{figures/app2}}
+      \only<1>{\includegraphics[width=1\textwidth]{figures/app2}}
+      \only<2>{\includegraphics[width=1\textwidth]{figures/app1}}
     \end{column}
   \end{columns}
 \end{frame}
@@ -761,8 +761,8 @@
   
   \onslide<3->{ \bigskip Recovery requires resources
     \begin{itemize}
-    \item processing time...to recovery scheduler
-    \item memory...to recover memory mapper
+    \item processing time...to recover scheduler
+    \item memory...to recover memory manager
     \end{itemize}
   }
 \end{frame}
@@ -914,11 +914,11 @@
   \only<1>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code1}}%
   \only<2>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code2}}%
   \only<3>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code3}}%
-  \only<4>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code4}}%
-  \only<5>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code5}}%
-  \only<6>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code6}}%
+  %\only<4>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code4}}%
+  \only<4>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code5}}%
+  \only<5>{\includegraphics[width=0.9\linewidth]{SuperGlueFigs/motivation/code6}}%
 
-  \PutAt<6>{(0.8cm,3.5cm)}{
+  \PutAt<5>{(0.8cm,3.5cm)}{
     \ColorBox[text width=11cm]{
       \LARGE {Manually writing is ad-hoc and error-prone} \\
       \vspace{0.6cm} \LARGE {Goal $\to$ {\bf automatically generate
@@ -1041,7 +1041,7 @@
       \only<2->{\item Interface functions operate on the file
         descriptor}
       \begin{itemize}
-        \only<2->{\item open/close file, read/write file...}
+        \only<2->{\item open/close/read/write...}
       \end{itemize}
     \end{itemize}
     %\begin{itemize}
@@ -1050,29 +1050,29 @@
   \end{textblock}
 \end{frame}
 
-\begin{frame}
-  \frametitle<1-2>{Interface Description Model -- Descriptor and Resource}
-  \begin{textblock}{110}(8,14)
-    \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_thread_no_res}}%
-    \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_thread_interface_funcs}}%    
-    %\only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_thread}}%
-  \end{textblock}
-  \begin{textblock}{52}(72,15)
-    \begin{itemize}
-      \only<1->{\item Thread id (descriptor)}
-    \end{itemize}
-    \begin{itemize}
-      \only<2->{\item Interface functions operate on thread
-        descriptor}
-      \begin{itemize}
-        \only<2->{\item block/wake up thread...}
-      \end{itemize}
-    \end{itemize}
-    %\begin{itemize}
-     % \only<3>{\item Access the thread (resource)}
-    %\end{itemize}
-  \end{textblock}
-\end{frame}
+% \begin{frame}
+%   \frametitle<1-2>{Interface Description Model -- Descriptor and Resource}
+%   \begin{textblock}{110}(8,14)
+%     \only<1>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_thread_no_res}}%
+%     \only<2>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_thread_interface_funcs}}%    
+%     %\only<3>{\includegraphics[width=1\linewidth]{SuperGlueFigs/design/dsn/v1/intro_descriptor_thread}}%
+%   \end{textblock}
+%   \begin{textblock}{52}(72,15)
+%     \begin{itemize}
+%       \only<1->{\item Thread id (descriptor)}
+%     \end{itemize}
+%     \begin{itemize}
+%       \only<2->{\item Interface functions operate on thread
+%         descriptor}
+%       \begin{itemize}
+%         \only<2->{\item block/wake up thread...}
+%       \end{itemize}
+%     \end{itemize}
+%     %\begin{itemize}
+%      % \only<3>{\item Access the thread (resource)}
+%     %\end{itemize}
+%   \end{textblock}
+% \end{frame}
 
 \begin{frame}
   \frametitle<1-6>{Interface Description Model -- Descriptor and
@@ -1086,7 +1086,7 @@
   \end{textblock}
   \begin{textblock}{52}(72,15)
     \begin{itemize}
-      \only<1-2, 5-6>{\item Lock id (descriptor)}
+      \only<1-2, 5-6>{\item Lock id (lock descriptor)}
     \end{itemize}
     \begin{itemize}
       \only<2, 5-6>{\item Interface functions operate on lock descriptor}
@@ -1095,7 +1095,7 @@
       \end{itemize}
     \end{itemize}
     \begin{itemize}
-      \only<5-6>{\item Access the synchronization (resource)}
+      \only<5-6>{\item Access the synchronization (lock resource)}
     \end{itemize}
 
   \PutAt<6>{(3.8cm,7.3cm)}{
@@ -1181,7 +1181,7 @@
       \only<3->{
       \item recover the dependency descriptor first
       \item e.g., {\it new\_fd = accept(fd)}.  Descriptor {\it fd}
-        must be recovered before {\it new\_fd}}
+        needs to be recovered before {\it new\_fd}}
     \end{itemize}
     \only<4->{{\it \color{blue} Timing of Recovery}}
     \begin{itemize}
@@ -1362,11 +1362,12 @@
 \section{Conclusion}
 
 \begin{frame}{Conclusion}
-  \sg\ -- code generation for system-level fault tolerance 
+  \sg\ -- 
   \begin{itemize}
-  \item synthesizes recovery code from the high-level system model
+  \item automatically generates system-level fault recovery code
+  %\item synthesizes recovery code from the high-level system model
   \item effectively eases the programmer burden
-  \item efficient and predictable system-level fault recovery
+  \item provides efficient and predictable fault recovery
   \end{itemize}
 \end{frame}
 

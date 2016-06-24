@@ -710,6 +710,7 @@
         \item recovery blocks
         \item checkpointing
         \item re-fork
+        \item ...
         \end{itemize}
       \item temporal redundancy
         \begin{itemize}
@@ -1038,11 +1039,14 @@
       \only<1->{\item File descriptor (descriptor)}
     \end{itemize}
     \begin{itemize}
-      \only<2->{\item Interface functions operate on the file
-        descriptor}
+      \only<2->{\item File system provides interface functions}
       \begin{itemize}
         \only<2->{\item open/close/read/write...}
       \end{itemize}
+    \end{itemize}
+    \begin{itemize}
+      \only<2->{\item Interface functions operate on the file
+        descriptor}
     \end{itemize}
     %\begin{itemize}
      % \only<3>{\item Access the file (resource)}
@@ -1089,10 +1093,13 @@
       \only<1-2, 5-6>{\item Lock id (lock descriptor)}
     \end{itemize}
     \begin{itemize}
-      \only<2, 5-6>{\item Interface functions operate on lock descriptor}
+      \only<2, 5-6>{\item Lock server provides interface functions}
       \begin{itemize}
         \only<2, 5-6>{\item init/free/take/release...}
       \end{itemize}
+    \end{itemize}
+    \begin{itemize}
+      \only<2, 5-6>{\item Interface functions operate on lock descriptor}
     \end{itemize}
     \begin{itemize}
       \only<5-6>{\item Access the synchronization (lock resource)}
